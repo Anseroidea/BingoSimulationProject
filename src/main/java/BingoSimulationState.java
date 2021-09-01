@@ -3,7 +3,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public enum BingoSimulationState {
 
@@ -14,21 +13,21 @@ public enum BingoSimulationState {
     BINGOFILE,
     HOWTOUSE;
 
-    private Scene currentScene;
-    private Class controller;
+    private Scene scene;
+    private static BingoSimulationState currentState;
 
     void setScene(Scene s){
-        currentScene = s;
+        scene = s;
     }
     public Scene getScene(){
-        return currentScene;
-    }
-    void setClass(Class c){
-        controller = c;
+        return scene;
     }
 
-    public void goToScene(){
-
+    public static void goToState(BingoSimulationState bss){
+        currentState = bss;
+    }
+    public static BingoSimulationState getCurrentState(){
+        return currentState;
     }
 
 

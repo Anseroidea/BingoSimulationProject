@@ -10,9 +10,11 @@ public class BingoCardApplication extends Application {
 
     public static final int WIDTH = 600;
     public static final int HEIGHT = 400;
+    public static Stage primaryStage;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        this.primaryStage = primaryStage;
         primaryStage.setTitle("Bingo Card");
         primaryStage.setResizable(false);
         BingoCardHandler bch = new BingoCardHandler(100);
@@ -28,8 +30,13 @@ public class BingoCardApplication extends Application {
                 }
             }
         }
-        primaryStage.setScene(BingoSimulationState.BINGOCARDLAYOUT.getScene());
+        BingoSimulationState.goToState(BingoSimulationState.MAINMENU);
+        primaryStage.setScene(BingoSimulationState.getCurrentState().getScene());
         primaryStage.show();
+    }
+
+    public static void refreshDisplay(){
+        primaryStage.setScene(BingoSimulationState.getCurrentState().getScene());
     }
 
     public static void main(String[] args){

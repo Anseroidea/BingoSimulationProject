@@ -14,6 +14,7 @@ public class MainMenu {
     }
 
     public void doMainMenuButton(MouseEvent mouseEvent) {
-
+        BingoSimulationState.goToState(BingoSimulationState.BINGOCARDLAYOUT);
+        BingoCardApplication.refreshDisplay();
     }
 }
