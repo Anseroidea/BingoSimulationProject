@@ -12,6 +12,16 @@ public class BingoCardHandler {
         r = new Random(seed);
         bingoCards = new ArrayList<>();
     }
+    public BingoCardHandler(Random r){
+        this.r = r;
+        bingoCards = new ArrayList<>();
+    }
+
+    public void markCards(BingoBall b){
+        for (BingoCard bc : bingoCards){
+            bc.markCard(b.getI());
+        }
+    }
 
     public BingoCard generateNewBingoCard(){
         while (true) {
@@ -39,8 +49,6 @@ public class BingoCardHandler {
             set.add(r.nextInt(14) + lower);
         }
         return Arrays.stream(set.toArray(new Integer[size])).mapToInt(Integer::intValue).toArray();
-
-
     }
 
     public static boolean isOriginalNotInList(BingoCard bc){

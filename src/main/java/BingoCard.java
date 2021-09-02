@@ -1,3 +1,6 @@
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
 public class BingoCard {
 
     private int id;
@@ -42,6 +45,26 @@ public class BingoCard {
         return card;
     }
 
+    public void markCard(int i){
+        if (i < 0 || i > 75)
+            return;
+        int row = getRowFromNum((i - 1)/15, i);
+        int col = (i - 1)/15;
+        if (row >= 0)
+            markedCard[row][col] = true;
+    }
+
+    private int getRowFromNum(int col, int n){
+        for (int i = 0; i < card[col].length; i++){
+            if (n == card[col][i]){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
+
     public void markCard(int r, int c){
         markedCard[r][c] = true;
     }
@@ -74,5 +97,21 @@ public class BingoCard {
 
     public boolean[][] getMarkedCard() {
         return markedCard;
+    }
+
+    public boolean isWinner() {
+        for (int r = 0; r < card.length; r++){
+            final boolean[] row = markedCard[r];
+            if (IntStream.range(0, card[r].length).mapToObj(i -> row[i]).allMatch(b -> b)){
+                return true;
+            }
+        }
+        for (int c = 0; c < markedCard.length; c++){
+            final int c1 = c;
+            if (IntStream.range(0, card.length).mapToObj(i -> markedCard[i][c1]).allMatch(b -> b)){
+                return true;
+            }
+        }
+        return IntStream.range(0, card.length).mapToObj(i -> markedCard[i][i]).allMatch(b -> b) || IntStream.range(0, card.length).mapToObj(i -> markedCard[markedCard.length - 1 - i][i]).allMatch(b -> b);
     }
 }

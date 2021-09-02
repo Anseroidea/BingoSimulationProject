@@ -1,18 +1,39 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class BingoSimulation {
 
-    private static BingoCardHandler bch;
-    private static ArrayList<BingoBall> balls;
+    private BingoCardHandler bch;
+    private ArrayList<BingoBall> newBalls;
+    private ArrayList<BingoBall> usedBalls;
+    private Random r;
 
-    static {
-
+    public BingoSimulation(int seed){
+        newBalls = new ArrayList<>();
+        usedBalls = new ArrayList<>();
+        for (int i = 1; i <= 75; i++){
+            newBalls.add(new BingoBall(i));
+        }
+        r = new Random(seed);
+        bch = new BingoCardHandler(r);
     }
 
-    public static void initBingoHandler(int seed){
-        bch = new BingoCardHandler(seed);
+    public void nextRoll(){
+        BingoBall ball = rollBall();
+        bch.markCards(ball);
     }
 
+    private BingoBall rollBall(){
+        if (newBalls.size() <= 0){
+            System.out.println("No more new balls!");
+            return null;
+        }
+        BingoBall ball = newBalls.remove(r.nextInt(newBalls.size()));
+        usedBalls.add(ball);
+        return ball;
+    }
 
-
+    public BingoCardHandler getBingoCardHandler() {
+        return bch;
+    }
 }

@@ -8,17 +8,35 @@ import java.util.Objects;
 
 public class BingoCardApplication extends Application {
 
-    public static final int WIDTH = 600;
-    public static final int HEIGHT = 400;
-    public static Stage primaryStage;
+    private static final int WIDTH = 600;
+    private static final int HEIGHT = 400;
+    private static Stage primaryStage;
+    private static int gameNumber;
+    private static BingoSimulation bs;
+
+    public static void setSimulation(int seed) {
+        gameNumber = seed;
+        bs = new BingoSimulation(seed);
+        BingoCardHandler bch = bs.getBingoCardHandler();
+        BingoCard card = bch.generateNewBingoCard();
+        BingoCardLayout.displayBingoCard(card);
+        while(!card.isWinner()){
+            bs.nextRoll();
+            BingoCardLayout.displayBingoCard(card);
+            refreshDisplay();
+            try {
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         this.primaryStage = primaryStage;
         primaryStage.setTitle("Bingo Card");
         primaryStage.setResizable(false);
-        BingoCardHandler bch = new BingoCardHandler(100);
-        BingoCardLayout.displayBingoCard(bch.generateNewBingoCard());
         for (BingoSimulationState bss : BingoSimulationState.values()){
             try {
                 bss.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(BingoCardApplication.class.getResource("/fxml/" + bss.name().toLowerCase() + ".fxml"))), 600, 400));
