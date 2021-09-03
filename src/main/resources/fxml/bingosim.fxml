@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BingoSimulationLayout">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="500.0" prefWidth="600.0">
+         <children>
+            <AnchorPane fx:id="bingoCardLayout" prefHeight="500.0" prefWidth="400.0" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Button alignment="CENTER" layoutX="30.0" layoutY="223.0" mnemonicParsing="false" onMouseClicked="#rollBallFunction" prefHeight="55.0" prefWidth="140.0" text="Roll Ball" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

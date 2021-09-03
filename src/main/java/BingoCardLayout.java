@@ -9,11 +9,14 @@ import javafx.scene.text.Font;
 public class BingoCardLayout {
 
     private static AnchorPane ap = new AnchorPane();
+    private static BingoCard bc;
 
     private static final Font numberFont = Font.loadFont(BingoCardApplication.class.getResource("/fonts/ArialBlack.ttf").toExternalForm(), 26);
     private static final Image bingoCardImage = new Image(BingoCardApplication.class.getResource("/images/bingocard.png").toExternalForm());
 
-    public static void displayBingoCard(BingoCard bc){
+    public static void displayBingoCard(){
+        if (bc == null)
+            return;
         Label idLabel = new Label("ID: " + bc.getId());
         idLabel.setFont(numberFont);
         idLabel.setTextFill(Color.WHITE);
@@ -60,4 +63,11 @@ public class BingoCardLayout {
         return ap;
     }
 
+    public static BingoCard getBc() {
+        return bc;
+    }
+
+    public static void setBc(BingoCard bc) {
+        BingoCardLayout.bc = bc;
+    }
 }

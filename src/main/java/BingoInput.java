@@ -17,7 +17,7 @@ public class BingoInput {
 
     public void submit(){
         gameNumber = Integer.parseInt(bingoInputField.getText());
-        BingoSimulationState.goToState(BingoSimulationState.BINGOCARDLAYOUT);
+        BingoSimulationState.goToState(BingoSimulationState.BINGOSIM);
         BingoCardApplication.setSimulation(gameNumber);
         BingoCardApplication.refreshDisplay();
     }

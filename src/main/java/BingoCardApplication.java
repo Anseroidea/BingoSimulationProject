@@ -3,9 +3,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.util.Locale;
-import java.util.Objects;
-
 public class BingoCardApplication extends Application {
 
     private static final int WIDTH = 600;
@@ -19,17 +16,14 @@ public class BingoCardApplication extends Application {
         bs = new BingoSimulation(seed);
         BingoCardHandler bch = bs.getBingoCardHandler();
         BingoCard card = bch.generateNewBingoCard();
-        BingoCardLayout.displayBingoCard(card);
-        while(!card.isWinner()){
-            bs.nextRoll();
-            BingoCardLayout.displayBingoCard(card);
-            refreshDisplay();
-            try {
-                Thread.sleep(1000);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        BingoCardLayout.setBc(card);
+        BingoCardLayout.displayBingoCard();
+        BingoSimulationLayout bsl = new BingoSimulationLayout();
+        bsl.setBingoCardLayout();
+    }
+
+    public static BingoSimulation getSimulation(){
+        return bs;
     }
 
     @Override
@@ -39,7 +33,8 @@ public class BingoCardApplication extends Application {
         primaryStage.setResizable(false);
         for (BingoSimulationState bss : BingoSimulationState.values()){
             try {
-                bss.setScene(new Scene(FXMLLoader.load(Objects.requireNonNull(BingoCardApplication.class.getResource("/fxml/" + bss.name().toLowerCase() + ".fxml"))), 600, 400));
+                FXMLLoader loader = new FXMLLoader(BingoCardApplication.class.getResource("/fxml/" + bss.name().toLowerCase() + ".fxml"));
+                bss.setScene(new Scene(loader.load(), 600, 400));
                 System.out.println(bss.name() + bss.getScene());
             } catch (Exception e){
                 switch(bss){

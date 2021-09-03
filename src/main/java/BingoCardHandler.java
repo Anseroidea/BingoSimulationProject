@@ -1,12 +1,10 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Random;
+import java.util.*;
 
 public class BingoCardHandler {
 
     private static Random r;
     private static ArrayList<BingoCard> bingoCards;
+    private static ArrayList<BingoCard> wonCards;
 
     public BingoCardHandler(int seed){
         r = new Random(seed);
@@ -51,7 +49,7 @@ public class BingoCardHandler {
         return Arrays.stream(set.toArray(new Integer[size])).mapToInt(Integer::intValue).toArray();
     }
 
-    public static boolean isOriginalNotInList(BingoCard bc){
+    public boolean isOriginalNotInList(BingoCard bc){
         for (BingoCard b : bingoCards) {
             if (b.equals(bc)) {
                 return false;
@@ -60,5 +58,10 @@ public class BingoCardHandler {
         return true;
     }
 
+    public void resetCards(){
+        bingoCards.addAll(wonCards);
+        wonCards.clear();
+        bingoCards.sort(Comparator.comparingInt(BingoCard::getId));
+    }
 
 }
