@@ -1,4 +1,5 @@
-import java.util.Arrays;
+package card;
+
 import java.util.stream.IntStream;
 
 public class BingoCard {

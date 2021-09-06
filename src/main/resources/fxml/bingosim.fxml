@@ -2,8 +2,9 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BingoSimulationLayout">
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sim.BingoSimulationLayout">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="500.0" prefWidth="600.0">
          <children>
@@ -11,6 +12,12 @@
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <Button alignment="CENTER" layoutX="30.0" layoutY="223.0" mnemonicParsing="false" onMouseClicked="#rollBallFunction" prefHeight="55.0" prefWidth="140.0" text="Roll Ball" />
+                  <Label fx:id="winLabel" layoutX="50.0" layoutY="434.0" text="You won!" visible="false">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="ballLabel" alignment="CENTER" layoutX="50.0" layoutY="301.0" prefHeight="17.0" prefWidth="100.0" />
                </children>
             </AnchorPane>
          </children>

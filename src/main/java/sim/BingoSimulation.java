@@ -1,5 +1,8 @@
+package sim;
+
 import java.util.ArrayList;
 import java.util.Random;
+import card.*;
 
 public class BingoSimulation {
 
@@ -18,9 +21,10 @@ public class BingoSimulation {
         bch = new BingoCardHandler(r);
     }
 
-    public void nextRoll(){
+    public BingoBall nextRoll(){
         BingoBall ball = rollBall();
         bch.markCards(ball);
+        return ball;
     }
 
     private BingoBall rollBall(){

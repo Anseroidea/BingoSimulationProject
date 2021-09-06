@@ -1,3 +1,5 @@
+package card;
+
 public class BingoBall {
 
     private Integer i;

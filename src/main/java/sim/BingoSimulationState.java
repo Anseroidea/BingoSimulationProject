@@ -1,3 +1,5 @@
+package sim;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -13,14 +15,24 @@ public enum BingoSimulationState {
     BINGOFILE,
     HOWTOUSE;
 
-    private Scene scene;
+    private AnchorPane ap;
+    private int width = 600;
+    private int height = 400;
     private static BingoSimulationState currentState;
 
-    void setScene(Scene s){
-        scene = s;
+    public void setAnchorPane(AnchorPane ap){
+        this.ap = ap;
+    }
+    public void setAnchorPane(AnchorPane ap, double w, double h){
+        this.ap = ap;
+        width = (int) w;
+        height = (int) h;
+    }
+    public AnchorPane getAnchorPane(){
+        return ap;
     }
     public Scene getScene(){
-        return scene;
+        return new Scene(ap, width, height);
     }
 
     public static void goToState(BingoSimulationState bss){

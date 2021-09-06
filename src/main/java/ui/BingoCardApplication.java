@@ -1,7 +1,15 @@
+package ui;
+
+import card.BingoCard;
+import card.BingoCardHandler;
+import card.BingoCardLayout;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import sim.BingoSimulation;
+import sim.BingoSimulationLayoutHandler;
+import sim.BingoSimulationState;
 
 public class BingoCardApplication extends Application {
 
@@ -18,13 +26,14 @@ public class BingoCardApplication extends Application {
         BingoCard card = bch.generateNewBingoCard();
         BingoCardLayout.setBc(card);
         BingoCardLayout.displayBingoCard();
-        BingoSimulationLayout bsl = new BingoSimulationLayout();
-        bsl.setBingoCardLayout();
+        BingoSimulationLayoutHandler.setCardLayout();
     }
 
     public static BingoSimulation getSimulation(){
         return bs;
     }
+
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -34,11 +43,13 @@ public class BingoCardApplication extends Application {
         for (BingoSimulationState bss : BingoSimulationState.values()){
             try {
                 FXMLLoader loader = new FXMLLoader(BingoCardApplication.class.getResource("/fxml/" + bss.name().toLowerCase() + ".fxml"));
-                bss.setScene(new Scene(loader.load(), 600, 400));
-                System.out.println(bss.name() + bss.getScene());
+                AnchorPane ap = loader.load();
+                bss.setAnchorPane(ap, ap.getPrefWidth(), ap.getPrefHeight());
+                if (bss.name().equalsIgnoreCase("bingosim"))
+                    BingoSimulationLayoutHandler.setBsl(loader.getController());
             } catch (Exception e){
                 switch(bss){
-                    case BINGOCARDLAYOUT -> bss.setScene(new Scene(BingoCardLayout.getAnchorPane(), 400, 500));
+                    case BINGOCARDLAYOUT -> bss.setAnchorPane(BingoCardLayout.getAnchorPane());
                     default -> e.printStackTrace();
                 }
             }
@@ -51,11 +62,18 @@ public class BingoCardApplication extends Application {
     public static void refreshDisplay(){
         primaryStage.setScene(BingoSimulationState.getCurrentState().getScene());
     }
+    public static void refreshCurrentScene(){
+        primaryStage.getScene().setRoot(BingoSimulationState.getCurrentState().getAnchorPane());
+    }
 
     public static void main(String[] args){
 
         Application.launch(args);
 
+    }
+
+    public static Stage getPrimaryStage(){
+        return primaryStage;
     }
 
 }

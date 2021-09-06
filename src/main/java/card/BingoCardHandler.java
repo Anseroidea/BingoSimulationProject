@@ -1,23 +1,43 @@
+package card;
+
 import java.util.*;
 
 public class BingoCardHandler {
 
-    private static Random r;
-    private static ArrayList<BingoCard> bingoCards;
-    private static ArrayList<BingoCard> wonCards;
+    private Random r;
+    private ArrayList<BingoCard> bingoCards;
+    private ArrayList<BingoCard> remainingCards;
+    private ArrayList<BingoCard> wonCards;
 
     public BingoCardHandler(int seed){
         r = new Random(seed);
         bingoCards = new ArrayList<>();
+        remainingCards = new ArrayList<>();
+        wonCards = new ArrayList<>();
     }
     public BingoCardHandler(Random r){
         this.r = r;
         bingoCards = new ArrayList<>();
+        remainingCards = new ArrayList<>();
+        wonCards = new ArrayList<>();
+    }
+
+    public void setWonCards(ArrayList<BingoCard> wonCards) {
+        this.wonCards = wonCards;
+    }
+
+    public ArrayList<BingoCard> getWonCards(){
+        return wonCards;
     }
 
     public void markCards(BingoBall b){
-        for (BingoCard bc : bingoCards){
+        for (int i = 0; i < remainingCards.size(); i++){
+            BingoCard bc = remainingCards.get(i);
             bc.markCard(b.getI());
+            if (bc.isWinner()) {
+                wonCards.add(bc);
+                remainingCards.remove(i--);
+            }
         }
     }
 
@@ -31,6 +51,7 @@ public class BingoCardHandler {
             BingoCard bc = new BingoCard(b, i, n, g, o, bingoCards.size());
             if (isOriginalNotInList(bc)){
                 bingoCards.add(bc);
+                remainingCards.add(bc);
                 return bc;
             }
         }

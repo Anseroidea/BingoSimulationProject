@@ -1,3 +1,5 @@
+package card;
+
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -5,6 +7,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
+import ui.BingoCardApplication;
 
 public class BingoCardLayout {
 
@@ -54,6 +57,7 @@ public class BingoCardLayout {
         }
         ap.getChildren().clear();
         ap.getChildren().addAll(gp, idLabel);
+        ap.setPrefSize(400, 500);
     }
 
     public static AnchorPane getAnchorPane(){

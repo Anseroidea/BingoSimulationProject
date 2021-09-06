@@ -1,7 +1,7 @@
-import javafx.fxml.FXML;
-import javafx.scene.Scene;
+package ui;
+
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
+import sim.BingoSimulationState;
 
 public class MainMenu {
     public void doMainMenuButton(MouseEvent mouseEvent) {
