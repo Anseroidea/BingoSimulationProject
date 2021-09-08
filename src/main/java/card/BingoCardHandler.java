@@ -63,7 +63,7 @@ public class BingoCardHandler {
             size = 4;
         }
         int lower = column * 15 + 1;
-        HashSet<Integer> set = new HashSet<>();
+        LinkedHashSet<Integer> set = new LinkedHashSet<>();
         while (set.size() < size){
             set.add(r.nextInt(14) + lower);
         }
