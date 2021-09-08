@@ -53,7 +53,7 @@ public class BingoCardHandler {
             int[] g = getBingoColumn(BingoCard.COLUMN_G);
             int[] o = getBingoColumn(BingoCard.COLUMN_O);
             BingoCard bc = new BingoCard(b, i, n, g, o, bingoCards.size());
-            if (isOriginalNotInList(bc)){
+            if (isOriginalNotInList(bc)) {
                 bingoCards.add(bc);
                 remainingCards.add(bc);
                 return bc;

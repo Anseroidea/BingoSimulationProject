@@ -37,8 +37,8 @@ public class BingoCardLayout {
         for (int r = 0; r < 5; r++){
             for (int c = 0; c < 5; c++){
                 StackPane sp = new StackPane();
-                if (card[r][c] > 0){
-                    Label l = new Label(card[r][c] + "");
+                if (card[c][r] > 0){
+                    Label l = new Label(card[c][r] + "");
                     l.setTextFill(Color.BLACK);
                     l.setFont(Font.loadFont(BingoCardApplication.class.getResource("/fonts/ArialBlack.ttf").toExternalForm(), 34));
                     l.setAlignment(Pos.BASELINE_CENTER);
@@ -52,7 +52,7 @@ public class BingoCardLayout {
                     cir.setRadius(33);
                     sp.getChildren().add(cir);
                 }
-                gp.add(sp, r, c);
+                gp.add(sp, c, r);
             }
         }
         ap.getChildren().clear();
