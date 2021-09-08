@@ -10,16 +10,20 @@ public class BingoCardHandler {
     private ArrayList<BingoCard> wonCards;
 
     public BingoCardHandler(int seed){
-        r = new Random(seed);
-        bingoCards = new ArrayList<>();
-        remainingCards = new ArrayList<>();
-        wonCards = new ArrayList<>();
+        this(new Random(seed), 1);
     }
     public BingoCardHandler(Random r){
+        this(r, 1);
+    }
+
+    public BingoCardHandler(Random r, int numCards){
         this.r = r;
         bingoCards = new ArrayList<>();
         remainingCards = new ArrayList<>();
         wonCards = new ArrayList<>();
+        for (int i = 0; i < numCards; i++){
+            generateNewBingoCard();
+        }
     }
 
     public void setWonCards(ArrayList<BingoCard> wonCards) {
@@ -80,9 +84,16 @@ public class BingoCardHandler {
     }
 
     public void resetCards(){
-        bingoCards.addAll(wonCards);
+        remainingCards.clear();
         wonCards.clear();
         bingoCards.sort(Comparator.comparingInt(BingoCard::getId));
     }
 
+    public BingoCard getCard(int i) {
+        if (i >= bingoCards.size()){
+            return null;
+        } else {
+            return bingoCards.get(i);
+        }
+    }
 }

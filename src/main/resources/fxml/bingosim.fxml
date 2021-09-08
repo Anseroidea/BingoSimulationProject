@@ -18,6 +18,7 @@
                      </font>
                   </Label>
                   <Label fx:id="ballLabel" alignment="CENTER" layoutX="50.0" layoutY="301.0" prefHeight="17.0" prefWidth="100.0" />
+                  <Spinner fx:id="idSpinner" layoutX="59.0" layoutY="29.0" prefHeight="25.0" prefWidth="82.0" />
                </children>
             </AnchorPane>
          </children>

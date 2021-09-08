@@ -11,14 +11,14 @@ public class BingoSimulation {
     private ArrayList<BingoBall> usedBalls;
     private Random r;
 
-    public BingoSimulation(int seed){
+    public BingoSimulation(int seed, int numCards){
         newBalls = new ArrayList<>();
         usedBalls = new ArrayList<>();
         for (int i = 1; i <= 75; i++){
             newBalls.add(new BingoBall(i));
         }
         r = new Random(seed);
-        bch = new BingoCardHandler(r);
+        bch = new BingoCardHandler(r, numCards);
     }
 
     public BingoBall nextRoll(){

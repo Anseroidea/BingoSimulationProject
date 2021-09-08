@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="100.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.BingoInput">
+<AnchorPane prefHeight="150.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.BingoInput">
    <children>
       <GridPane layoutX="14.0" prefHeight="75.0" prefWidth="372.0">
         <columnConstraints>
@@ -17,10 +17,11 @@
          <children>
             <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="170.0" text="Bingo Game Number:" />
             <TextField fx:id="bingoInputField" onKeyTyped="#checkIfNum" GridPane.columnIndex="1" />
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="168.0" GridPane.rowIndex="1" />
+            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="21.0" prefHeight="17.0" prefWidth="170.0" text="Number of Cards:" GridPane.rowIndex="1" />
+            <TextField fx:id="numCardsField" layoutX="196.0" layoutY="17.0" onKeyTyped="#checkIfNum" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Label fx:id="errorLabel" layoutX="26.0" layoutY="78.0" prefHeight="17.0" prefWidth="240.0" textFill="RED" />
-      <Button layoutX="332.0" layoutY="66.0" mnemonicParsing="false" onMouseClicked="#submit" text="Submit" />
+      <Label fx:id="errorLabel" layoutX="22.0" layoutY="115.0" prefHeight="17.0" prefWidth="240.0" textFill="RED" />
+      <Button layoutX="332.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#submit" text="Submit" />
    </children>
 </AnchorPane>
