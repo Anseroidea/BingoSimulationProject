@@ -1,5 +1,7 @@
 package sim;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -9,19 +11,20 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import jdk.jshell.spi.SPIResolutionException;
 import ui.*;
 import card.*;
 
 import java.net.URL;
-import java.util.LinkedHashMap;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class BingoSimulationLayout implements Initializable{
 
+    public TableView<Map.Entry<Integer, Integer>> rollsTable;
     @FXML private TableColumn<String, Integer> ballRolledColumn;
     @FXML private TableColumn<String, Integer> bingoIDColumn;
     @FXML private TableColumn<String, Integer> rollColumn2;
-    @FXML private TableColumn<LinkedHashMap<Integer, Integer>, Integer> rollColumn;
+    @FXML private TableColumn<Map.Entry<Integer, Integer>, Integer> rollColumn;
     private int selectedCard;
     private int numWinners;
     @FXML private Label ballLabel;
@@ -103,9 +106,38 @@ public class BingoSimulationLayout implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         ballRolledColumn.getTableView().setEditable(false);
         bingoIDColumn.getTableView().setEditable(false);
-        ballRolledColumn.setText("Ball");
-        rollColumn.setText("Roll");
-        rollColumn2.setText("Roll");
-        bingoIDColumn.setText("ID");
+        ObservableList<Map.Entry<Integer, Integer>> list = FXCollections.observableList(Arrays.asList(
+                toEntry(1, 2)
+        ));
+        rollColumn.setCellValueFactory(
+                new PropertyValueFactory<>("value")
+        );
+        rollColumn.getTableView().setItems(list);
     }
+
+    private static <K, V> Map.Entry<K, V> toEntry(K input, V inputValue) {
+        return new Map.Entry<>() {
+
+            private final K key = input;
+            public V value = inputValue;
+
+            @Override
+            public K getKey() {
+                return key;
+            }
+
+            @Override
+            public V getValue() {
+                return value;
+            }
+
+            @Override
+            public V setValue(V value) {
+                V prev = this.value;
+                this.value = value;
+                return prev;
+            }
+        };
+    }
+
 }
