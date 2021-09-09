@@ -5,7 +5,8 @@ import java.util.stream.IntStream;
 public class BingoCard {
 
     private int id;
-    private int[][] card; //-1 means free space
+    private boolean isWinner = false;
+    private int[][] card; //-1 means free space, column major
 
     private boolean[][] markedCard;
     public static final int COLUMN_B = 0;
@@ -101,18 +102,27 @@ public class BingoCard {
     }
 
     public boolean isWinner() {
+        if (isWinner)
+            return true;
         for (int r = 0; r < card.length; r++){
             final boolean[] row = markedCard[r];
             if (IntStream.range(0, card[r].length).mapToObj(i -> row[i]).allMatch(b -> b)){
+                isWinner = true;
                 return true;
             }
         }
         for (int c = 0; c < markedCard.length; c++){
             final int c1 = c;
             if (IntStream.range(0, card.length).mapToObj(i -> markedCard[i][c1]).allMatch(b -> b)){
+                isWinner = true;
                 return true;
             }
         }
-        return IntStream.range(0, card.length).mapToObj(i -> markedCard[i][i]).allMatch(b -> b) || IntStream.range(0, card.length).mapToObj(i -> markedCard[markedCard.length - 1 - i][i]).allMatch(b -> b);
+        if (IntStream.range(0, card.length).mapToObj(i -> markedCard[i][i]).allMatch(b -> b) || IntStream.range(0, card.length).mapToObj(i -> markedCard[markedCard.length - 1 - i][i]).allMatch(b -> b)){
+            isWinner = true;
+            return true;
+        } else {
+            return false;
+        }
     }
 }

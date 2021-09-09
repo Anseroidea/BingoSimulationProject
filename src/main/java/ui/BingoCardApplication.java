@@ -27,6 +27,7 @@ public class BingoCardApplication extends Application {
         BingoCardLayout.setBc(card);
         BingoCardLayout.displayBingoCard();
         BingoSimulationLayoutHandler.setCardLayout();
+        BingoSimulationLayoutHandler.setNumCards(numCards);
     }
 
     public static BingoSimulation getSimulation(){

@@ -1,5 +1,6 @@
 package card;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class BingoCardHandler {
@@ -35,12 +36,12 @@ public class BingoCardHandler {
     }
 
     public void markCards(BingoBall b){
-        for (int i = 0; i < remainingCards.size(); i++){
-            BingoCard bc = remainingCards.get(i);
+        for (int i = 0; i < bingoCards.size(); i++){
+            BingoCard bc = bingoCards.get(i);
             bc.markCard(b.getI());
-            if (bc.isWinner()) {
+            if (bc.isWinner() && !wonCards.contains(bc)) {
                 wonCards.add(bc);
-                remainingCards.remove(i--);
+                remainingCards.remove(remainingCards.indexOf(bc));
             }
         }
     }
@@ -95,5 +96,9 @@ public class BingoCardHandler {
         } else {
             return bingoCards.get(i);
         }
+    }
+
+    public ArrayList<BingoCard> getRemainingCards() {
+        return remainingCards;
     }
 }

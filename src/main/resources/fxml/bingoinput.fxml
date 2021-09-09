@@ -3,9 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="150.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.BingoInput">
+<AnchorPane prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.BingoInput">
    <children>
-      <GridPane layoutX="14.0" prefHeight="75.0" prefWidth="372.0">
+      <GridPane layoutX="14.0" layoutY="14.0" prefHeight="169.0" prefWidth="372.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -13,15 +13,21 @@
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="170.0" text="Bingo Game Number:" />
-            <TextField fx:id="bingoInputField" onKeyTyped="#checkIfNum" GridPane.columnIndex="1" />
+            <TextField fx:id="bingoInputField" onKeyTyped="#checkIfNum" prefWidth="95.0" GridPane.columnIndex="1" />
             <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="21.0" prefHeight="17.0" prefWidth="170.0" text="Number of Cards:" GridPane.rowIndex="1" />
-            <TextField fx:id="numCardsField" layoutX="196.0" layoutY="17.0" onKeyTyped="#checkIfNum" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="64.0" prefHeight="17.0" prefWidth="170.0" text="Number of Days:" GridPane.rowIndex="3" />
+            <Spinner fx:id="numCardsSpinner" prefHeight="25.0" prefWidth="75.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Spinner fx:id="dayNumSpinner" prefHeight="25.0" prefWidth="53.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="108.0" prefHeight="17.0" prefWidth="170.0" text="Total Winners:" GridPane.rowIndex="2" />
+            <Spinner fx:id="totalWinnersSpinner" prefHeight="25.0" prefWidth="75.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Label fx:id="errorLabel" layoutX="22.0" layoutY="115.0" prefHeight="17.0" prefWidth="240.0" textFill="RED" />
-      <Button layoutX="332.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#submit" text="Submit" />
+      <Label fx:id="errorLabel" layoutX="14.0" layoutY="209.0" prefHeight="17.0" prefWidth="240.0" textFill="RED" />
+      <Button layoutX="332.0" layoutY="205.0" mnemonicParsing="false" onMouseClicked="#submit" text="Submit" />
    </children>
 </AnchorPane>
