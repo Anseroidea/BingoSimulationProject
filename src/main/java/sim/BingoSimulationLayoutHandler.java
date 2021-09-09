@@ -16,4 +16,8 @@ public class BingoSimulationLayoutHandler {
         bsl.setNumCards(numCards);
     }
 
+    public static void setNumWinners(int winner){
+        bsl.setNumWinners(winner);
+    }
+
 }

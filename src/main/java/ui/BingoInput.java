@@ -31,8 +31,10 @@ public class BingoInput implements Initializable {
             errorLabel.setText("");
             int gameNumber = Integer.parseInt(bingoInputField.getText());
             int numCards = numCardsSpinner.getValue();
+            int numWinners = totalWinnersSpinner.getValue();
+            int dayNum = dayNumSpinner.getValue();
             BingoSimulationState.goToState(BingoSimulationState.BINGOSIM);
-            BingoCardApplication.setSimulation(gameNumber, numCards);
+            BingoCardApplication.setSimulation(gameNumber, numCards, numWinners, dayNum);
             BingoCardApplication.refreshDisplay();
         }
     }
@@ -55,8 +57,15 @@ public class BingoInput implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        numCardsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE));
+        totalWinnersSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1));
+        numCardsSpinner.setEditable(true);
+        totalWinnersSpinner.setEditable(true);
         numCardsSpinner.getEditor().textProperty().addListener((obs, oldValue, newValue) -> {
+            int winners = totalWinnersSpinner.getValue();
             totalWinnersSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.parseInt(newValue)));
+            totalWinnersSpinner.getValueFactory().setValue(winners);
         });
+        dayNumSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 5));
     }
 }

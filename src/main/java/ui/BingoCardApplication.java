@@ -19,7 +19,7 @@ public class BingoCardApplication extends Application {
     private static int gameNumber;
     private static BingoSimulation bs;
 
-    public static void setSimulation(int seed, int numCards) {
+    public static void setSimulation(int seed, int numCards, int numWinners, int dayNum) {
         gameNumber = seed;
         bs = new BingoSimulation(seed, numCards);
         BingoCardHandler bch = bs.getBingoCardHandler();
@@ -28,6 +28,7 @@ public class BingoCardApplication extends Application {
         BingoCardLayout.displayBingoCard();
         BingoSimulationLayoutHandler.setCardLayout();
         BingoSimulationLayoutHandler.setNumCards(numCards);
+        BingoSimulationLayoutHandler.setNumWinners(numWinners);
     }
 
     public static BingoSimulation getSimulation(){
