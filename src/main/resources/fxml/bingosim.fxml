@@ -42,21 +42,17 @@
                               <AnchorPane prefHeight="296.0" prefWidth="200.0">
                                  <HBox layoutY="66.0" prefHeight="230.0" prefWidth="200.0">
                                     <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                                       <TableView fx:id="rollsTable" prefHeight="216.0" prefWidth="99.0">
-                                          <columns>
-                                             <TableColumn fx:id="rollColumn" minWidth="0.0" prefWidth="45.0"
-                                                          text="C1"/>
-                                             <TableColumn fx:id="ballRolledColumn" prefWidth="40.0" text="C2"/>
-                                          </columns>
-                                       </TableView>
+                                       <content>
+                                          <TableView fx:id="rollsTable" prefHeight="229.0" prefWidth="100.0">
+                                            <columns>
+                                              <TableColumn fx:id="rollColumn" prefWidth="75.0" text="C1" />
+                                              <TableColumn prefWidth="75.0" text="C2" />
+                                            </columns>
+                                          </TableView>
+                                       </content>
                                     </ScrollPane>
                                     <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                                       <TableView prefHeight="230.0" prefWidth="98.0">
-                                          <columns>
-                                             <TableColumn fx:id="rollColumn2" prefWidth="43.0" text="C1"/>
-                                             <TableColumn fx:id="bingoIDColumn" prefWidth="43.0" text="C2"/>
-                                          </columns>
-                                       </TableView>
+                                       <TableView fx:id="bingoWinnerTable" prefHeight="230.0" prefWidth="98.0" />
                                     </ScrollPane>
                                  </HBox>
                               </AnchorPane>
