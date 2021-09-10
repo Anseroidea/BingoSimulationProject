@@ -1,5 +1,9 @@
 package sim;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -106,8 +110,9 @@ public class BingoSimulationLayout implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         ballRolledColumn.getTableView().setEditable(false);
         bingoIDColumn.getTableView().setEditable(false);
+        Map<Integer, Integer> test = new HashMap<>();
+
         ObservableList<Map.Entry<Integer, Integer>> list = FXCollections.observableList(Arrays.asList(
-                toEntry(1, 2)
         ));
         rollColumn.setCellValueFactory(
                 new PropertyValueFactory<>("value")
@@ -115,6 +120,7 @@ public class BingoSimulationLayout implements Initializable{
         rollColumn.getTableView().setItems(list);
     }
 
+    /*
     private static <K, V> Map.Entry<K, V> toEntry(K input, V inputValue) {
         return new Map.Entry<>() {
 
@@ -137,7 +143,15 @@ public class BingoSimulationLayout implements Initializable{
                 this.value = value;
                 return prev;
             }
+
+            public ObjectProperty valueProperty(){
+                return value;
+            }
+
+
         };
     }
+
+     */
 
 }
