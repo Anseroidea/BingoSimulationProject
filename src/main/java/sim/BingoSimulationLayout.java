@@ -4,15 +4,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.print.Printer;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import print.CardPrinter;
 import ui.*;
 import card.*;
 
+import javafx.print.PrinterJob;
 import java.net.URL;
 import java.util.*;
 
@@ -72,6 +75,7 @@ public class BingoSimulationLayout implements Initializable{
         BingoCardApplication.refreshCurrentScene();
         updateRollsTable();
         updateWinsTable();
+        CardPrinter.printToImg(new int[]{1, 2, 3, 4});
     }
 
     public void setBingoCardLayout(){
