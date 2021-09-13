@@ -1,6 +1,6 @@
 package card;
 
-import java.lang.reflect.Array;
+import sim.CardWin;
 import java.util.*;
 
 public class BingoCardHandler {
@@ -9,15 +9,17 @@ public class BingoCardHandler {
     private ArrayList<BingoCard> bingoCards;
     private ArrayList<BingoCard> remainingCards;
     private ArrayList<BingoCard> wonCards;
+    private ArrayList<CardWin> cardWins = new ArrayList<>();
+    private boolean isUpdateWonCards;
 
     public BingoCardHandler(int seed){
-        this(new Random(seed), 1);
+        this(new Random(seed), 1, false);
     }
     public BingoCardHandler(Random r){
-        this(r, 1);
+        this(r, 1, false);
     }
 
-    public BingoCardHandler(Random r, int numCards){
+    public BingoCardHandler(Random r, int numCards, boolean isUpdateWonCards){
         this.r = r;
         bingoCards = new ArrayList<>();
         remainingCards = new ArrayList<>();
@@ -25,6 +27,7 @@ public class BingoCardHandler {
         for (int i = 0; i < numCards; i++){
             generateNewBingoCard();
         }
+        this.isUpdateWonCards = isUpdateWonCards;
     }
 
     public void setWonCards(ArrayList<BingoCard> wonCards) {
@@ -35,18 +38,31 @@ public class BingoCardHandler {
         return wonCards;
     }
 
-    public void markCards(BingoBall b){
-        for (int i = 0; i < bingoCards.size(); i++){
-            BingoCard bc = bingoCards.get(i);
-            bc.markCard(b.getI());
-            if (bc.isWinner() && !wonCards.contains(bc)) {
-                wonCards.add(bc);
-                remainingCards.remove(remainingCards.indexOf(bc));
+    public void markCards(BingoBall b, int rollNum){
+        if (isUpdateWonCards) {
+            for (BingoCard bc : bingoCards) {
+                bc.markCard(b.getI());
+                if (bc.isWinner() && !wonCards.contains(bc)) {
+                    cardWins.add(new CardWin(bc.getId(), rollNum));
+                    wonCards.add(bc);
+                    remainingCards.remove(bc);
+                }
+            }
+        } else {
+            for (int i = 0; i < remainingCards.size(); i++) {
+                BingoCard bc = remainingCards.get(i);
+                bc.markCard(b.getI());
+                if (bc.isWinner() && !wonCards.contains(bc)) {
+                    cardWins.add(new CardWin(bc.getId(), rollNum));
+                    wonCards.add(bc);
+                    remainingCards.remove(bc);
+                    i--;
+                }
             }
         }
     }
 
-    public BingoCard generateNewBingoCard(){
+    public void generateNewBingoCard(){
         while (true) {
             int[] b = getBingoColumn(BingoCard.COLUMN_B);
             int[] i = getBingoColumn(BingoCard.COLUMN_I);
@@ -57,7 +73,7 @@ public class BingoCardHandler {
             if (isOriginalNotInList(bc)) {
                 bingoCards.add(bc);
                 remainingCards.add(bc);
-                return bc;
+                return;
             }
         }
     }
@@ -101,4 +117,9 @@ public class BingoCardHandler {
     public ArrayList<BingoCard> getRemainingCards() {
         return remainingCards;
     }
+
+    public ArrayList<CardWin> getCardWins(){
+        return cardWins;
+    }
+
 }

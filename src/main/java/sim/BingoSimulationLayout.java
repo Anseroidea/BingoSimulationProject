@@ -1,23 +1,15 @@
 package sim;
 
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.*;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.util.Callback;
-import jdk.jshell.spi.SPIResolutionException;
 import ui.*;
 import card.*;
 
@@ -26,26 +18,27 @@ import java.util.*;
 
 public class BingoSimulationLayout implements Initializable{
 
-    @FXML private TableView<Integer> bingoWinnerTable;
-    @FXML private TableView<Integer> rollsTable;
-    private ObservableMap<Integer, Integer> map;
-    private ObservableList<Integer> keys;
-    private int selectedCard;
+    @FXML private TableView<CardWin> winsTable;
+    @FXML private TableColumn<CardWin, Integer> winRollsColumn;
+    @FXML private TableColumn<CardWin, Integer> winColumn;
+    @FXML private TableColumn<BallRoll, Integer> rollsColumn;
+    @FXML private TableColumn<BallRoll, Integer> ballsColumn;
+    @FXML private TableView<BallRoll> rollsTable;
+    private ObservableList<BallRoll> ballRolls;
+    private ObservableList<CardWin> cardWins;
     private int numWinners;
-    @FXML private Label ballLabel;
-    @FXML private Label winLabel;
     @FXML private Spinner<Integer> idSpinner;
     @FXML private Label rollLabel;
     @FXML private Button rollNWinnersButton;
 
-
+    @FXML
     public void rollBallFunction(MouseEvent mouseEvent) {
         BingoBall ball = BingoCardApplication.getSimulation().nextRoll();
         rollLabel.setText("Roll " + BingoCardApplication.getSimulation().getBallsRolled());
-        map.put(BingoCardApplication.getSimulation().getBallsRolled(), ball.getI());
-        rollsTable.setItems(keys);
         BingoCardLayout.displayBingoCard();
         BingoCardApplication.refreshCurrentScene();
+        updateRollsTable();
+        updateWinsTable();
     }
 
     @FXML
@@ -60,6 +53,8 @@ public class BingoSimulationLayout implements Initializable{
         rollLabel.setText("Roll " + BingoCardApplication.getSimulation().getBallsRolled());
         BingoCardLayout.displayBingoCard();
         BingoCardApplication.refreshCurrentScene();
+        updateRollsTable();
+        updateWinsTable();
     }
 
     @FXML
@@ -75,9 +70,10 @@ public class BingoSimulationLayout implements Initializable{
         rollLabel.setText("Roll " + BingoCardApplication.getSimulation().getBallsRolled() + ": " + b.getI());
         BingoCardLayout.displayBingoCard();
         BingoCardApplication.refreshCurrentScene();
+        updateRollsTable();
+        updateWinsTable();
     }
 
-    @FXML
     public void setBingoCardLayout(){
         AnchorPane ap = BingoCardLayout.getAnchorPane();
         VBox v = (VBox) BingoSimulationState.BINGOSIM.getAnchorPane().getChildren().get(0);
@@ -85,19 +81,26 @@ public class BingoSimulationLayout implements Initializable{
         h.getChildren().set(0, ap);
     }
 
-    @FXML
     public void setNumCards(int numCards){
         idSpinner.setEditable(true);
         idSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, numCards - 1));
         idSpinner.getValueFactory().setValue(0);
         idSpinner.getEditor().textProperty().addListener((obs, oldValue, newValue) -> {
-            BingoCardLayout.setBc(BingoCardApplication.getSimulation().getBingoCardHandler().getCard(Integer.parseInt(newValue)));
-            BingoCardLayout.displayBingoCard();
-            BingoCardApplication.refreshCurrentScene();
+            try {
+                viewCard(Integer.parseInt(newValue));
+            } catch(Exception e){
+
+            }
         });
     }
 
-    @FXML
+    private void viewCard(int id){
+        idSpinner.getValueFactory().setValue(id);
+        BingoCardLayout.setBc(BingoCardApplication.getSimulation().getBingoCardHandler().getCard(id));
+        BingoCardLayout.displayBingoCard();
+        BingoCardApplication.refreshCurrentScene();
+    }
+
     public void setNumWinners(int winners){
         numWinners = winners;
         String label = "Roll Until " + winners + " Winner";
@@ -107,28 +110,49 @@ public class BingoSimulationLayout implements Initializable{
         rollNWinnersButton.setText(label);
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        map = FXCollections.observableHashMap();
-        keys = FXCollections.observableArrayList();
-        rollsTable = new TableView<>(keys);
-        map.addListener((MapChangeListener.Change<? extends Integer, ? extends Integer> change) -> {
-            boolean removed = change.wasRemoved();
-            if (removed != change.wasAdded()) {
-                if (removed) {
-                    keys.remove(change.getKey());
-                } else {
-                    keys.add(change.getKey());
-                }
-            }
-        });
-        map.put(2, 4);
-        TableColumn<Integer, Integer> rollColumn = new TableColumn<>("Roll");
-        TableColumn<Integer, Integer> ballColumn = new TableColumn<>("Ball");
-        rollColumn.setCellValueFactory(cd -> Bindings.createIntegerBinding(cd::getValue).asObject());
-        ballColumn.setCellValueFactory(cd -> Bindings.valueAt(map, cd.getValue()));
-        rollsTable.getColumns().clear();
-        rollsTable.getColumns().setAll(rollColumn, ballColumn);
+    private void updateRollsTable(){
+        ArrayList<BingoBall> usedBalls = BingoCardApplication.getSimulation().getUsedBalls();
+        for (int i = ballRolls.size(); i < usedBalls.size(); i++){
+            BingoBall ball = usedBalls.get(i);
+            ballRolls.add(new BallRoll(i + 1, ball.getI()));
+        }
     }
 
+    private void updateWinsTable(){
+        ArrayList<CardWin> tempCards = BingoCardApplication.getSimulation().getBingoCardHandler().getCardWins();
+        for (int i = cardWins.size(); i < tempCards.size(); i++){
+            cardWins.add(tempCards.get(i));
+        }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        ballRolls = FXCollections.observableArrayList();
+        cardWins = FXCollections.observableArrayList();
+        rollsColumn.setCellValueFactory(new PropertyValueFactory<>("rollNum"));
+        ballsColumn.setCellValueFactory(new PropertyValueFactory<>("ballNum"));
+        winRollsColumn.setCellValueFactory(new PropertyValueFactory<>("rollNum"));
+        winColumn.setCellValueFactory(new PropertyValueFactory<>("winningID"));
+        rollsColumn.setEditable(false);
+        ballsColumn.setEditable(false);
+        rollsTable.setEditable(false);
+        rollsColumn.setResizable(false);
+        ballsColumn.setResizable(false);
+        rollsTable.setItems(ballRolls);
+        winRollsColumn.setEditable(false);
+        winColumn.setEditable(false);
+        winsTable.setEditable(false);
+        winRollsColumn.setResizable(false);
+        winColumn.setResizable(false);
+        winsTable.setItems(cardWins);
+        rollsTable.getStylesheets().add(BingoSimulationLayout.class.getResource("/css/hideScrollBarSimLayout.css").toString());
+        winsTable.getStylesheets().add(BingoSimulationLayout.class.getResource("/css/hideScrollBarSimLayout.css").toString());
+        winsTable.setRowFactory(tv -> {
+            TableRow<CardWin> row = new TableRow<>();
+            row.setOnMouseClicked(event ->{
+                viewCard(row.getItem().getWinningID());
+            });
+            return row;
+        });
+    }
 }

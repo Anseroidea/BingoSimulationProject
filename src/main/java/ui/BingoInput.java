@@ -2,10 +2,7 @@ package ui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import sim.BingoSimulationState;
 
@@ -14,9 +11,10 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class BingoInput implements Initializable {
-    public Spinner<Integer> numCardsSpinner;
-    public Spinner<Integer> dayNumSpinner;
-    public Spinner<Integer> totalWinnersSpinner;
+    @FXML private Spinner<Integer> numCardsSpinner;
+    @FXML private Spinner<Integer> dayNumSpinner;
+    @FXML private Spinner<Integer> totalWinnersSpinner;
+    @FXML private CheckBox updateWonCards;
     @FXML private TextField bingoInputField;
     @FXML private Label errorLabel;
 
@@ -33,8 +31,9 @@ public class BingoInput implements Initializable {
             int numCards = numCardsSpinner.getValue();
             int numWinners = totalWinnersSpinner.getValue();
             int dayNum = dayNumSpinner.getValue();
+            boolean isUpdateWonCards = updateWonCards.isSelected();
             BingoSimulationState.goToState(BingoSimulationState.BINGOSIM);
-            BingoCardApplication.setSimulation(gameNumber, numCards, numWinners, dayNum);
+            BingoCardApplication.setSimulation(gameNumber, numCards, numWinners, dayNum, isUpdateWonCards);
             BingoCardApplication.refreshDisplay();
         }
     }
@@ -62,10 +61,15 @@ public class BingoInput implements Initializable {
         numCardsSpinner.setEditable(true);
         totalWinnersSpinner.setEditable(true);
         numCardsSpinner.getEditor().textProperty().addListener((obs, oldValue, newValue) -> {
-            int winners = totalWinnersSpinner.getValue();
-            totalWinnersSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.parseInt(newValue)));
-            totalWinnersSpinner.getValueFactory().setValue(winners);
+            try {
+                int winners = totalWinnersSpinner.getValue();
+                totalWinnersSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.parseInt(newValue)));
+                totalWinnersSpinner.getValueFactory().setValue(winners);
+            } catch(Exception e){
+
+            }
         });
         dayNumSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 5));
+        dayNumSpinner.setEditable(true);
     }
 }
