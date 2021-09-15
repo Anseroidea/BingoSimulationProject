@@ -17,7 +17,7 @@ public class BingoCardLayout {
     private static final Font numberFont = Font.loadFont(BingoCardApplication.class.getResource("/fonts/ArialBlack.ttf").toExternalForm(), 26);
     private static final Image bingoCardImage = new Image(BingoCardApplication.class.getResource("/images/bingocard.png").toExternalForm());
 
-    public static void displayBingoCard(){
+    public static void displayBingoCard(BingoCard bc, boolean marked){
         if (bc == null)
             return;
         Label idLabel = new Label("ID: " + bc.getId());
@@ -45,7 +45,7 @@ public class BingoCardLayout {
                     l.setMinSize(66, 66);
                     sp.getChildren().add(l);
                 }
-                if (markedCard[r][c]){
+                if (markedCard[r][c] && marked){
                     Circle cir = new Circle();
                     cir.setOpacity(0.5);
                     cir.setFill(Color.RED);
@@ -58,6 +58,10 @@ public class BingoCardLayout {
         ap.getChildren().clear();
         ap.getChildren().addAll(gp, idLabel);
         ap.setPrefSize(400, 500);
+    }
+
+    public static void displayBingoCard(){
+        displayBingoCard(bc, true);
     }
 
     public static AnchorPane getAnchorPane(){

@@ -78,4 +78,8 @@ public class BingoCardApplication extends Application {
         return primaryStage;
     }
 
+    public static int getGameNumber(){
+        return gameNumber;
+    }
+
 }

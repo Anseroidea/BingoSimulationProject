@@ -122,4 +122,7 @@ public class BingoCardHandler {
         return cardWins;
     }
 
+    public ArrayList<BingoCard> getCards() {
+        return bingoCards;
+    }
 }

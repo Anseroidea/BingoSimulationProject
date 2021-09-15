@@ -18,6 +18,7 @@ import card.*;
 import javafx.print.PrinterJob;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class BingoSimulationLayout implements Initializable{
 
@@ -75,7 +76,7 @@ public class BingoSimulationLayout implements Initializable{
         BingoCardApplication.refreshCurrentScene();
         updateRollsTable();
         updateWinsTable();
-        CardPrinter.printToImg(new int[]{1, 2, 3, 4});
+        CardPrinter.printToImg(IntStream.range(0, BingoCardApplication.getSimulation().getBingoCardHandler().getCards().size()).toArray());
     }
 
     public void setBingoCardLayout(){
