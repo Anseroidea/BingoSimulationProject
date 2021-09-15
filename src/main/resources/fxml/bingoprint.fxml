@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-
 
 <AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="print.BingoPrint">
    <children>
       <HBox prefHeight="600.0" prefWidth="700.0">
          <children>
-            <AnchorPane prefHeight="600.0" prefWidth="220.0" />
+            <AnchorPane prefHeight="600.0" prefWidth="300.0">
+               <children>
+                  <Button layoutX="14.0" layoutY="561.0" mnemonicParsing="false" text="Print" />
+               </children></AnchorPane>
+            <BorderPane prefHeight="600.0" prefWidth="400.0">
+               <center>
+                  <ImageView fitHeight="500.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" />
+               </center>
+               <top>
+                  <Pane prefHeight="48.0" prefWidth="400.0" BorderPane.alignment="CENTER" />
+               </top>
+               <bottom>
+                  <Pane prefHeight="200.0" prefWidth="400.0" BorderPane.alignment="CENTER" />
+               </bottom>
+            </BorderPane>
          </children>
       </HBox>
    </children>

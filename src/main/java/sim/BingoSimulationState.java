@@ -12,7 +12,7 @@ public enum BingoSimulationState {
     BINGOINPUT,
     BINGOSIM,
     BINGOCARDLAYOUT,
-    BINGOFILE,
+    BINGOPRINT,
     HOWTOUSE;
 
     private AnchorPane ap;

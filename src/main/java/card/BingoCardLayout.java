@@ -40,7 +40,7 @@ public class BingoCardLayout {
                 if (card[c][r] > 0){
                     Label l = new Label(card[c][r] + "");
                     l.setTextFill(Color.BLACK);
-                    l.setFont(Font.loadFont(BingoCardApplication.class.getResource("/fonts/ArialBlack.ttf").toExternalForm(), 34));
+                    l.setFont(Font.loadFont(BingoCardApplication.class.getResource("/fonts/Lora-Bold.ttf").toExternalForm(), 34));
                     l.setAlignment(Pos.BASELINE_CENTER);
                     l.setMinSize(66, 66);
                     sp.getChildren().add(l);
