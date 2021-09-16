@@ -34,6 +34,7 @@ public class BingoSimulationLayout implements Initializable{
     @FXML private Spinner<Integer> idSpinner;
     @FXML private Label rollLabel;
     @FXML private Button rollNWinnersButton;
+    private int currentCard;
 
     @FXML
     public void rollBallFunction(MouseEvent mouseEvent) {
@@ -81,6 +82,13 @@ public class BingoSimulationLayout implements Initializable{
 
     public void setBingoCardLayout(){
         AnchorPane ap = BingoCardLayout.getAnchorPane();
+        ap.setOnScroll(event -> {
+            if (event.getDeltaY() < 0 && currentCard > 0){
+                viewCard(currentCard - 1);
+            } else if (event.getDeltaY() > 0 && currentCard < BingoCardApplication.getSimulation().getBingoCardHandler().getCards().size() - 1){
+                viewCard(currentCard + 1);
+            }
+        });
         VBox v = (VBox) BingoSimulationState.BINGOSIM.getAnchorPane().getChildren().get(0);
         HBox h = (HBox) v.getChildren().get(1);
         h.getChildren().set(0, ap);
@@ -100,6 +108,7 @@ public class BingoSimulationLayout implements Initializable{
     }
 
     private void viewCard(int id){
+        currentCard = id;
         idSpinner.getValueFactory().setValue(id);
         BingoCardLayout.setBc(BingoCardApplication.getSimulation().getBingoCardHandler().getCard(id));
         BingoCardLayout.displayBingoCard();
