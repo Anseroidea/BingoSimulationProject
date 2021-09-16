@@ -86,7 +86,7 @@ public class BingoCardHandler {
         int lower = column * 15 + 1;
         LinkedHashSet<Integer> set = new LinkedHashSet<>();
         while (set.size() < size){
-            set.add(r.nextInt(14) + lower);
+            set.add(r.nextInt(15) + lower);
         }
         return Arrays.stream(set.toArray(new Integer[size])).mapToInt(Integer::intValue).toArray();
     }

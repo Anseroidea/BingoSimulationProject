@@ -14,14 +14,15 @@ public class BingoCardLayout {
     private static AnchorPane ap = new AnchorPane();
     private static BingoCard bc;
 
-    private static final Font numberFont = Font.loadFont(BingoCardApplication.class.getResource("/fonts/ArialBlack.ttf").toExternalForm(), 26);
+    private static final Font numberFont = Font.loadFont(BingoCardApplication.class.getResource("/fonts/Lora-Bold.ttf").toExternalForm(), 34);
+    private static final Font idFont = Font.loadFont(BingoCardApplication.class.getResource("/fonts/ArialBlack.ttf").toExternalForm(), 26);
     private static final Image bingoCardImage = new Image(BingoCardApplication.class.getResource("/images/bingocard.png").toExternalForm());
 
     public static void displayBingoCard(BingoCard bc, boolean marked){
         if (bc == null)
             return;
         Label idLabel = new Label("ID: " + bc.getId());
-        idLabel.setFont(numberFont);
+        idLabel.setFont(idFont);
         idLabel.setTextFill(Color.WHITE);
         idLabel.setAlignment(Pos.CENTER_LEFT);
         idLabel.setPrefSize(350, 46);
@@ -40,7 +41,7 @@ public class BingoCardLayout {
                 if (card[c][r] > 0){
                     Label l = new Label(card[c][r] + "");
                     l.setTextFill(Color.BLACK);
-                    l.setFont(Font.loadFont(BingoCardApplication.class.getResource("/fonts/Lora-Bold.ttf").toExternalForm(), 34));
+                    l.setFont(numberFont);
                     l.setAlignment(Pos.BASELINE_CENTER);
                     l.setMinSize(66, 66);
                     sp.getChildren().add(l);
