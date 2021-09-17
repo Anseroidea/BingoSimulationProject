@@ -1,11 +1,15 @@
 package print;
 
+import com.sun.security.auth.NTSidPrimaryGroupPrincipal;
+import javafx.application.Preloader;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -17,17 +21,20 @@ import javafx.stage.Stage;
 import ui.BingoCardApplication;
 
 import javax.imageio.ImageIO;
+import javafx.scene.image.ImageView;
 import java.io.File;
 import java.io.IOException;
 
 public class CardPrinterLayout {
-    private Font bingoFont = Font.loadFont(BingoCardApplication.class.getResource("/fonts/CascadiaMono-SemiBold.ttf").toExternalForm(), 72);
-    private final double bingoFontSize = 72;
+    private Font bingoFont = Font.loadFont(BingoCardApplication.class.getResource("/fonts/CascadiaMono-SemiBold.ttf").toExternalForm(), 96);
+    private final double bingoFontSize = 96;
     private Font numberFont = Font.loadFont(BingoCardApplication.class.getResource("/fonts/Lora-Bold.ttf").toExternalForm(), 34);
     private final double numberFontSize = 34;
     private Font freeSpaceFont = Font.loadFont(BingoCardApplication.class.getResource("/fonts/Candara.ttf").toExternalForm(),19);
     private final double freeSpaceFontSize = 19;
     private Font idFont = Font.loadFont(BingoCardApplication.class.getResource("/fonts/ArialBlack.ttf").toExternalForm(), 26);
+    private Color bingoColor = Color.WHITE;
+    private Color numberColor = Color.BLACK;
     private Color backgroundColor = Color.rgb(255, 0, 8);
     private Color tileColor = Color.rgb(255, 255, 255);
 
@@ -102,15 +109,18 @@ public class CardPrinterLayout {
         ap.setStyle("-fx-background-color: rgb(" + backgroundColor.getRed() * 255 + "," + backgroundColor.getGreen() * 255 + "," + backgroundColor.getBlue() * 255 + ");");
         HBox h = new HBox();
         h.setLayoutX(25);
-        h.setLayoutY(47);
+        h.setLayoutY(25);
         h.setPrefSize(350, 72);
         h.setSpacing(5);
-        Label bText = new Label("B");
-        bText.setPrefSize(66, 72);
-        bText.setFont(bingoFont);
-        bText.setStyle("-fx-font-family:CascadiaMono;\n-fx-font-size: 72pt;");
-        bText.applyCss();
-        h.getChildren().add(bText);
+        String[] letters = new String[]{"B", "I", "N", "G", "O"};
+        for (int i = 0; i < letters.length; i++){
+            Label bText = new Label(letters[i]);
+            bText.setPrefHeight(72);
+            bText.setFont(bingoFont);
+            bText.setTextFill(bingoColor);
+            bText.setAlignment(Pos.CENTER);
+            h.getChildren().add(bText);
+        }
         GridPane gp = new GridPane();
         for (int i = 0; i < 5; i++){
             for (int j = 0; j < 5; j++){

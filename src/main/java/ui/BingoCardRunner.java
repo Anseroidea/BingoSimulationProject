@@ -1,5 +1,7 @@
 package ui;
 
+import print.CardPrinterLayout;
+
 public class BingoCardRunner {
 
     public static void main(String[] args){

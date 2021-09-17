@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import print.CardPrinterLayout;
 import sim.BingoSimulation;
 import sim.BingoSimulationLayoutHandler;
 import sim.BingoSimulationState;
@@ -39,6 +40,8 @@ public class BingoCardApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        new CardPrinterLayout().getLayout();
+        /*
         this.primaryStage = primaryStage;
         primaryStage.setTitle("Bingo Card");
         primaryStage.setResizable(false);
@@ -59,6 +62,8 @@ public class BingoCardApplication extends Application {
         BingoSimulationState.goToState(BingoSimulationState.MAINMENU);
         primaryStage.setScene(BingoSimulationState.getCurrentState().getScene());
         primaryStage.show();
+
+         */
     }
 
     public static void refreshDisplay(){
