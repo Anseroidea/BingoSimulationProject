@@ -1,19 +1,14 @@
 package print;
 
-import com.sun.security.auth.NTSidPrimaryGroupPrincipal;
-import javafx.application.Preloader;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
@@ -21,7 +16,6 @@ import javafx.stage.Stage;
 import ui.BingoCardApplication;
 
 import javax.imageio.ImageIO;
-import javafx.scene.image.ImageView;
 import java.io.File;
 import java.io.IOException;
 
@@ -30,8 +24,8 @@ public class CardPrinterLayout {
     private final double bingoFontSize = 96;
     private Font numberFont = Font.loadFont(BingoCardApplication.class.getResource("/fonts/Lora-Bold.ttf").toExternalForm(), 34);
     private final double numberFontSize = 34;
-    private Font freeSpaceFont = Font.loadFont(BingoCardApplication.class.getResource("/fonts/Candara.ttf").toExternalForm(),19);
-    private final double freeSpaceFontSize = 19;
+    private Font freeSpaceFont = Font.loadFont(BingoCardApplication.class.getResource("/fonts/Candara.ttf").toExternalForm(),25.3);
+    private final double freeSpaceFontSize = 25.3;
     private Font idFont = Font.loadFont(BingoCardApplication.class.getResource("/fonts/ArialBlack.ttf").toExternalForm(), 26);
     private Color bingoColor = Color.WHITE;
     private Color numberColor = Color.BLACK;
@@ -101,7 +95,7 @@ public class CardPrinterLayout {
         this.tileColor = tileColor;
     }
 
-    public AnchorPane getLayout(){
+    public AnchorPane getBlankLayout(){
         AnchorPane ap = new AnchorPane();
         ap.setPrefSize(400, 500);
         ap.setMinSize(400, 500);
@@ -116,6 +110,7 @@ public class CardPrinterLayout {
         for (int i = 0; i < letters.length; i++){
             Label bText = new Label(letters[i]);
             bText.setPrefHeight(72);
+            bText.setPrefWidth(66);
             bText.setFont(bingoFont);
             bText.setTextFill(bingoColor);
             bText.setAlignment(Pos.CENTER);
@@ -124,9 +119,15 @@ public class CardPrinterLayout {
         GridPane gp = new GridPane();
         for (int i = 0; i < 5; i++){
             for (int j = 0; j < 5; j++){
-                Label l = new Label("2");
+                Label l = new Label("");
+                if (i == 2 && j == 2){
+                    l.setText("Free\nSpace");
+                    l.setTextAlignment(TextAlignment.CENTER);
+                    l.setContentDisplay(ContentDisplay.CENTER);
+                    l.setFont(freeSpaceFont);
+                }
                 l.setPrefSize(66, 66);
-                l.setStyle("-fx-background-color: rgb(" + tileColor.getRed() * 255 + "," + tileColor.getGreen() * 255 + "," + tileColor.getBlue() * 255 + ");");
+                l.setStyle("-fx-border-colo: black;\n-fx-background-color: rgb(" + tileColor.getRed() * 255 + "," + tileColor.getGreen() * 255 + "," + tileColor.getBlue() * 255 + ");");
                 gp.add(l, i, j);
             }
         }

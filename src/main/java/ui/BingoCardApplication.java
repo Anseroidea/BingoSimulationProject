@@ -40,7 +40,7 @@ public class BingoCardApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        new CardPrinterLayout().getLayout();
+        new CardPrinterLayout().getBlankLayout();
         /*
         this.primaryStage = primaryStage;
         primaryStage.setTitle("Bingo Card");

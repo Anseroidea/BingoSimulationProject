@@ -7,7 +7,7 @@ import sim.BingoSimulationState;
 public class MainMenu {
     public void doMainMenuButton(MouseEvent mouseEvent) {
         CardPrinterLayout cpl = new CardPrinterLayout();
-        cpl.getLayout();
+        cpl.getBlankLayout();
         BingoSimulationState.goToState(BingoSimulationState.BINGOINPUT);
         BingoCardApplication.refreshDisplay();
     }
