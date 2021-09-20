@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.BingoHelpPrint">
+<AnchorPane prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: WHITE;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.BingoHelpPrint">
     <Label layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="136.0" text="Help (Page 2)">
         <font>
             <Font name="System Bold" size="20.0" />
@@ -16,8 +16,8 @@
         </font>
     </Label>
     <Label layoutX="40.0" layoutY="60.0" prefHeight="79.0" prefWidth="544.0" text="On the print screen, edit the appearance of the card to your liking. Choose at least one file format to output to and adjust which cards to be printed (all by default). A popup that confirms that files have been created will appear once you press the print button. Pressing &quot;Open File Location&quot; will open the output folder in Windows Explorer. Closing this popup will close the entire application." wrapText="true" />
-    <Button layoutX="509.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#goToMenu" text="Main Menu" />
-    <Button layoutX="13.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#goToPrevious" text="&lt; Previous" />
+    <Button layoutX="509.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#goToMenu" style="-fx-background-color: #825ce0;" text="Main Menu" textFill="WHITE" />
+    <Button layoutX="13.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#goToPrevious" style="-fx-background-color: #825ce0;" text="&lt; Previous" textFill="WHITE" />
    <Label layoutX="165.0" layoutY="384.0" text="Happy Bingoing!">
       <font>
          <Font name="Bauhaus 93" size="36.0" />

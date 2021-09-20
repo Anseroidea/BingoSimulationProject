@@ -6,8 +6,8 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="print.BingoPrint">
     <HBox prefHeight="600.0" prefWidth="700.0">
-        <AnchorPane prefHeight="600.0" prefWidth="300.0">
-            <Button layoutX="14.0" layoutY="561.0" mnemonicParsing="false" onMouseClicked="#printSelected" text="Print" />
+        <AnchorPane prefHeight="600.0" prefWidth="300.0" style="-fx-background-color: white;">
+            <Button layoutX="14.0" layoutY="561.0" mnemonicParsing="false" onMouseClicked="#printSelected" style="-fx-background-color: #825ce0;" text="Print" textFill="WHITE" />
             <GridPane alignment="CENTER_RIGHT" layoutX="25.0" layoutY="45.0" prefHeight="287.0" prefWidth="250.0">
                 <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -27,28 +27,28 @@
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 </rowConstraints>
                 <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="118.0" text="Background Color:" />
-                <ColorPicker fx:id="backgroundColorPicker" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" />
+                <ColorPicker fx:id="backgroundColorPicker" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #67e1ff;" GridPane.columnIndex="1" />
                 <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="24.0" prefHeight="17.0" prefWidth="118.0" text="Background Color:" />
                 <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="24.0" prefHeight="17.0" prefWidth="118.0" text="Tile Color:" GridPane.rowIndex="1" />
                 <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="69.0" prefHeight="17.0" prefWidth="118.0" text="Free Space Tile Color:" GridPane.rowIndex="2" />
-                <ColorPicker fx:id="tileColorPicker" layoutX="135.0" layoutY="12.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <ColorPicker fx:id="freeSpaceTileColorPicker" layoutX="135.0" layoutY="40.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <ColorPicker fx:id="tileColorPicker" layoutX="135.0" layoutY="12.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #67e1ff;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <ColorPicker fx:id="freeSpaceTileColorPicker" layoutX="135.0" layoutY="40.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #67e1ff;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="73.0" prefHeight="17.0" prefWidth="118.0" text="Bingo Text Color:" GridPane.rowIndex="3" />
                 <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="102.0" prefHeight="17.0" prefWidth="118.0" text="Number Text Color:" GridPane.rowIndex="4" />
                 <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="131.0" prefHeight="17.0" prefWidth="118.0" text="Free Space Text Color:" GridPane.rowIndex="5" />
                 <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="160.0" prefHeight="17.0" prefWidth="118.0" text="ID Text Color:" GridPane.rowIndex="6" />
-                <ColorPicker fx:id="bingoTextColorPicker" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <ColorPicker fx:id="numberTextColorPicker" layoutX="135.0" layoutY="98.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <ColorPicker fx:id="freeSpaceTextColorPicker" layoutX="135.0" layoutY="127.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <ColorPicker fx:id="idTextColorPicker" layoutX="135.0" layoutY="156.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <ColorPicker fx:id="bingoTextColorPicker" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #67e1ff;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <ColorPicker fx:id="numberTextColorPicker" layoutX="135.0" layoutY="98.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #67e1ff;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <ColorPicker fx:id="freeSpaceTextColorPicker" layoutX="135.0" layoutY="127.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #67e1ff;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <ColorPicker fx:id="idTextColorPicker" layoutX="135.0" layoutY="156.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #67e1ff;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                 <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="177.0" prefHeight="17.0" prefWidth="118.0" text="Bingo Font:" GridPane.rowIndex="7" />
-                <ComboBox fx:id="bingoFontPicker" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                <ComboBox fx:id="bingoFontPicker" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #67e1ff;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                 <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="197.0" prefHeight="17.0" prefWidth="118.0" text="Number Font:" GridPane.rowIndex="8" />
-                <ComboBox fx:id="numberFontPicker" layoutX="135.0" layoutY="193.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                <ComboBox fx:id="freeSpaceFontPicker" layoutX="135.0" layoutY="219.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                <ComboBox fx:id="numberFontPicker" layoutX="135.0" layoutY="193.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #67e1ff;" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                <ComboBox fx:id="freeSpaceFontPicker" layoutX="135.0" layoutY="219.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #67e1ff;" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                 <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="223.0" prefHeight="17.0" prefWidth="118.0" text="Free Space Font:" GridPane.rowIndex="9" />
                 <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="249.0" prefHeight="17.0" prefWidth="118.0" text="ID Font:" GridPane.rowIndex="10" />
-                <ComboBox fx:id="idFontPicker" layoutX="135.0" layoutY="245.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                <ComboBox fx:id="idFontPicker" layoutX="135.0" layoutY="245.0" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #67e1ff;" GridPane.columnIndex="1" GridPane.rowIndex="10" />
             </GridPane>
          <Label layoutX="15.0" layoutY="14.0" text="Card">
              <font>
@@ -88,10 +88,10 @@
                 <AnchorPane prefHeight="500.0" prefWidth="400.0" />
             </center>
             <top>
-                <Pane prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER" />
+                <Pane prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
             </top>
             <bottom>
-                <Pane prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER" />
+                <Pane prefHeight="50.0" prefWidth="400.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
             </bottom>
         </BorderPane>
     </HBox>
