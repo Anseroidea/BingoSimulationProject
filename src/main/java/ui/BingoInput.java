@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.util.StringConverter;
 import sim.BingoSimulationState;
 
 import java.net.URL;
@@ -24,7 +25,7 @@ public class BingoInput implements Initializable {
 
     public void submit(){
         if (bingoInputField.getText().chars().anyMatch(c -> !Character.isDigit(c)) || bingoInputField.getText().isBlank()) {
-            errorLabel.setText("Number of Cards must only be an integer!");
+            errorLabel.setText("Number of Cards must only be a positive integer!");
         } else {
             errorLabel.setText("");
             int gameNumber = Integer.parseInt(bingoInputField.getText());
@@ -37,36 +38,61 @@ public class BingoInput implements Initializable {
             BingoCardApplication.refreshDisplay();
         }
     }
-
-    public void checkIfNum(KeyEvent keyEvent) {
-        /*
-        if (!keyEvent.getCharacter().chars().allMatch(Character::isDigit)){
-            int beforeLength = bingoInputField.getText().length();
-            bingoInputField.setText(bingoInputField.getText().chars().filter(Character::isDigit).mapToObj(Character::toString).collect(Collectors.joining()));
-            bingoInputField.positionCaret(bingoInputField.getText().length());
-            if (bingoInputField.getText().length() < beforeLength)
-                errorLabel.setText("Game Number must only be an integer!");
-            else
-                errorLabel.setText("");
-        } else {
-            errorLabel.setText("");
-        }
-         */
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         numCardsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE));
         totalWinnersSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1));
         numCardsSpinner.setEditable(true);
         totalWinnersSpinner.setEditable(true);
+        numCardsSpinner.getValueFactory().setConverter(new StringConverter<Integer>() {
+            @Override
+            public String toString(Integer object) {
+                return object.toString();
+            }
+
+            @Override
+            public Integer fromString(String string) {
+                if (string.matches("-?\\d+")){
+                    return Integer.parseInt(string);
+                } else {
+                    return 1;
+                }
+            }
+        });
         numCardsSpinner.getEditor().textProperty().addListener((obs, oldValue, newValue) -> {
             try {
-                int winners = totalWinnersSpinner.getValue();
-                totalWinnersSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.parseInt(newValue)));
-                totalWinnersSpinner.getValueFactory().setValue(winners);
-            } catch(Exception e){
+                if (newValue.matches("-?\\d+") && Integer.parseInt(newValue) > 0){
+                    int winners = totalWinnersSpinner.getValue();
+                    totalWinnersSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.parseInt(newValue)));
+                    totalWinnersSpinner.getValueFactory().setValue(winners);
+                } else {
+                    numCardsSpinner.getEditor().textProperty().setValue("1");
+                    numCardsSpinner.getValueFactory().setValue(1);
+                }
 
+            } catch(Exception ignored){
+
+            }
+        });
+        totalWinnersSpinner.getValueFactory().setConverter(new StringConverter<Integer>() {
+            @Override
+            public String toString(Integer object) {
+                return object.toString();
+            }
+
+            @Override
+            public Integer fromString(String string) {
+                if (string.matches("-?\\d+")){
+                    return Integer.parseInt(string);
+                } else {
+                    return 1;
+                }
+            }
+        });
+        totalWinnersSpinner.getEditor().textProperty().addListener((obs, oldValue, newValue) -> {
+            if (!(newValue.matches("-?\\d+") && Integer.parseInt(newValue) > 0)){
+                totalWinnersSpinner.getValueFactory().setValue(1);
+                totalWinnersSpinner.getEditor().textProperty().setValue("1");
             }
         });
         dayNumSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 5));

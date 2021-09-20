@@ -125,4 +125,32 @@ public class BingoCard {
             return false;
         }
     }
+
+    public void clearMarkedCard(){
+        isWinner = false;
+        for (int i = 0; i < 5; i++){
+            for (int j = 0; j < 5; j++){
+                markedCard[i][j] = false;
+                if (i == 2 && j == 2){
+                    markedCard[i][j] = true;
+                }
+            }
+        }
+    }
+
+    public boolean[][] getMarkedCardFromInt(int[] ballsRolled){
+        boolean[][] intMarkedCard = new boolean[5][5];
+        intMarkedCard[2][2] = true;
+        for (int i = 0; i < ballsRolled.length; i++){
+            int ball = ballsRolled[i];
+            for (int c = 0; c < 5; c++){
+                for (int r = 0; r < 5; r++){
+                    if (card[c][r] == ball || r == 2 && c == 2) {
+                        intMarkedCard[r][c] = true;
+                    }
+                }
+            }
+        }
+        return intMarkedCard;
+    }
 }

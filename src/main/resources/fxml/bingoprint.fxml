@@ -1,44 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="print.BingoPrint">
-   <children>
-      <HBox prefHeight="600.0" prefWidth="700.0">
-         <children>
-            <AnchorPane prefHeight="600.0" prefWidth="300.0">
-               <children>
-                  <Button layoutX="14.0" layoutY="561.0" mnemonicParsing="false" text="Print" />
-                  <GridPane alignment="CENTER_RIGHT" layoutY="40.0" prefHeight="179.0" prefWidth="300.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Label alignment="CENTER_RIGHT" text="Label" />
-                     </children>
-                  </GridPane>
-               </children></AnchorPane>
-            <BorderPane prefHeight="600.0" prefWidth="400.0">
-               <center>
-                  <ImageView fitHeight="500.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" />
-               </center>
-               <top>
-                  <Pane prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER" />
-               </top>
-               <bottom>
-                  <Pane prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER" />
-               </bottom>
-            </BorderPane>
-         </children>
-      </HBox>
-   </children>
+    <HBox prefHeight="600.0" prefWidth="700.0">
+        <AnchorPane prefHeight="600.0" prefWidth="300.0">
+            <Button layoutX="14.0" layoutY="561.0" mnemonicParsing="false" onMouseClicked="#printSelected" text="Print" />
+            <GridPane alignment="CENTER_RIGHT" layoutX="25.0" layoutY="45.0" prefHeight="287.0" prefWidth="250.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="118.0" text="Background Color:" />
+                <ColorPicker fx:id="backgroundColorPicker" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" />
+                <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="24.0" prefHeight="17.0" prefWidth="118.0" text="Background Color:" />
+                <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="24.0" prefHeight="17.0" prefWidth="118.0" text="Tile Color:" GridPane.rowIndex="1" />
+                <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="69.0" prefHeight="17.0" prefWidth="118.0" text="Free Space Tile Color:" GridPane.rowIndex="2" />
+                <ColorPicker fx:id="tileColorPicker" layoutX="135.0" layoutY="12.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <ColorPicker fx:id="freeSpaceTileColorPicker" layoutX="135.0" layoutY="40.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="73.0" prefHeight="17.0" prefWidth="118.0" text="Bingo Text Color:" GridPane.rowIndex="3" />
+                <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="102.0" prefHeight="17.0" prefWidth="118.0" text="Number Text Color:" GridPane.rowIndex="4" />
+                <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="131.0" prefHeight="17.0" prefWidth="118.0" text="Free Space Text Color:" GridPane.rowIndex="5" />
+                <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="160.0" prefHeight="17.0" prefWidth="118.0" text="ID Text Color:" GridPane.rowIndex="6" />
+                <ColorPicker fx:id="bingoTextColorPicker" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <ColorPicker fx:id="numberTextColorPicker" layoutX="135.0" layoutY="98.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <ColorPicker fx:id="freeSpaceTextColorPicker" layoutX="135.0" layoutY="127.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <ColorPicker fx:id="idTextColorPicker" layoutX="135.0" layoutY="156.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="177.0" prefHeight="17.0" prefWidth="118.0" text="Bingo Font:" GridPane.rowIndex="7" />
+                <ComboBox fx:id="bingoFontPicker" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="197.0" prefHeight="17.0" prefWidth="118.0" text="Number Font:" GridPane.rowIndex="8" />
+                <ComboBox fx:id="numberFontPicker" layoutX="135.0" layoutY="193.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                <ComboBox fx:id="freeSpaceFontPicker" layoutX="135.0" layoutY="219.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="223.0" prefHeight="17.0" prefWidth="118.0" text="Free Space Font:" GridPane.rowIndex="9" />
+                <Label alignment="CENTER_RIGHT" layoutX="10.0" layoutY="249.0" prefHeight="17.0" prefWidth="118.0" text="ID Font:" GridPane.rowIndex="10" />
+                <ComboBox fx:id="idFontPicker" layoutX="135.0" layoutY="245.0" prefHeight="25.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            </GridPane>
+         <Label layoutX="15.0" layoutY="14.0" text="Card">
+             <font>
+                 <Font name="System Bold" size="18.0" />
+             </font>
+         </Label>
+         <Label layoutX="15.0" layoutY="348.0" text="Export Options">
+             <font>
+                 <Font name="System Bold" size="18.0" />
+             </font>
+         </Label>
+            <VBox layoutX="30.0" layoutY="381.0" prefHeight="50.0" prefWidth="51.0" spacing="10.0">
+                <RadioButton fx:id="pngSelection" mnemonicParsing="false" text="png" />
+                <RadioButton fx:id="pdfSelection" mnemonicParsing="false" text="pdf" />
+            </VBox>
+         <Label fx:id="errorLabel" layoutX="67.0" layoutY="565.0" text="Please select at least one export option" textFill="RED" visible="false" />
+         <GridPane layoutX="30.0" layoutY="431.0" prefHeight="71.0" prefWidth="192.0">
+           <columnConstraints>
+             <ColumnConstraints hgrow="SOMETIMES" maxWidth="72.0" minWidth="10.0" prefWidth="43.0" />
+             <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="119.0" />
+           </columnConstraints>
+           <rowConstraints>
+             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+           </rowConstraints>
+            <children>
+               <Spinner fx:id="minIndexSpinner" prefHeight="25.0" prefWidth="60.0" />
+               <Spinner fx:id="maxIndexSpinner" prefHeight="25.0" prefWidth="60.0" GridPane.rowIndex="1" />
+               <Label text="Min Index Printed" GridPane.columnIndex="1" />
+               <Label layoutX="82.0" layoutY="20.0" text="Max Index Printed" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            </children>
+         </GridPane>
+         <Label fx:id="minMaxErrorLabel" layoutX="78.0" layoutY="556.0" prefHeight="35.0" prefWidth="185.0" text="Minimum index should be less than or equal to max index!" textAlignment="CENTER" textFill="RED" visible="false" wrapText="true" />
+        </AnchorPane>
+        <BorderPane prefHeight="600.0" prefWidth="400.0">
+            <center>
+                <AnchorPane prefHeight="500.0" prefWidth="400.0" />
+            </center>
+            <top>
+                <Pane prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER" />
+            </top>
+            <bottom>
+                <Pane prefHeight="50.0" prefWidth="400.0" BorderPane.alignment="CENTER" />
+            </bottom>
+        </BorderPane>
+    </HBox>
 </AnchorPane>

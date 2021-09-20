@@ -21,7 +21,30 @@ public class BingoCardLayout {
     public static void displayBingoCard(BingoCard bc, boolean marked){
         if (bc == null)
             return;
-        Label idLabel = new Label("ID: " + bc.getId());
+        displayBingoCard(bc.getId(), bc.getCard(), bc.getMarkedCard(), marked, bc.isWinner());
+    }
+
+    public static void displayBingoCard(){
+        displayBingoCard(bc, true);
+    }
+
+    public static AnchorPane getAnchorPane(){
+        BackgroundImage bi = new BackgroundImage(bingoCardImage, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        ap.setBackground(new Background(bi));
+        return ap;
+    }
+
+    public static BingoCard getBc() {
+        return bc;
+    }
+
+    public static void setBc(BingoCard bc) {
+        BingoCardLayout.bc = bc;
+    }
+
+    public static void displayBingoCard(int id, int[][] card, boolean[][] markedCard, boolean marked, boolean isWon){
+        Label idLabel = new Label("ID: " + id);
         idLabel.setFont(idFont);
         idLabel.setTextFill(Color.WHITE);
         idLabel.setAlignment(Pos.CENTER_LEFT);
@@ -33,8 +56,6 @@ public class BingoCardLayout {
         gp.setVgap(5);
         gp.setLayoutX(25);
         gp.setLayoutY(124);
-        int[][] card = bc.getCard();
-        boolean[][] markedCard = bc.getMarkedCard();
         for (int r = 0; r < 5; r++){
             for (int c = 0; c < 5; c++){
                 StackPane sp = new StackPane();
@@ -57,26 +78,17 @@ public class BingoCardLayout {
             }
         }
         ap.getChildren().clear();
+        if (isWon && marked){
+            Label wonLabel = new Label("Won!");
+            wonLabel.setFont(idFont);
+            wonLabel.setTextFill(Color.WHITE);
+            wonLabel.setLayoutX(300);
+            wonLabel.setAlignment(Pos.CENTER_RIGHT);
+            wonLabel.setPrefHeight(46);
+            ap.getChildren().add(wonLabel);
+        }
         ap.getChildren().addAll(gp, idLabel);
         ap.setPrefSize(400, 500);
     }
 
-    public static void displayBingoCard(){
-        displayBingoCard(bc, true);
-    }
-
-    public static AnchorPane getAnchorPane(){
-        BackgroundImage bi = new BackgroundImage(bingoCardImage, BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT);
-        ap.setBackground(new Background(bi));
-        return ap;
-    }
-
-    public static BingoCard getBc() {
-        return bc;
-    }
-
-    public static void setBc(BingoCard bc) {
-        BingoCardLayout.bc = bc;
-    }
 }

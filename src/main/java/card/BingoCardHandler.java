@@ -104,6 +104,10 @@ public class BingoCardHandler {
         remainingCards.clear();
         wonCards.clear();
         bingoCards.sort(Comparator.comparingInt(BingoCard::getId));
+        remainingCards.addAll(bingoCards);
+        for (BingoCard card : bingoCards){
+            card.clearMarkedCard();
+        }
     }
 
     public BingoCard getCard(int i) {

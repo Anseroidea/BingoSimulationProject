@@ -30,6 +30,10 @@ public class Day {
         return pmRolls;
     }
 
+    public String getName(){
+        return name;
+    }
+
     public ArrayList<Integer> getRollsAsList(){
         return new ArrayList<>(Arrays.asList(amRolls, pmRolls));
     }

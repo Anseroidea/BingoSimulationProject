@@ -10,14 +10,16 @@ public class BingoSimulation {
     private BingoCardHandler bch;
     private final ArrayList<BingoBall> newBalls;
     private final ArrayList<BingoBall> usedBalls;
+    private final ArrayList<BallRoll> ballRolls;
     private final Day[] days;
     private final Random r;
-    private int rollsToWinners;
+    private int rollsToWinners = -1;
     private int winners;
 
     public BingoSimulation(int seed, int numCards, int numWinners, int dayNum, boolean isUpdateWonCards){
         newBalls = new ArrayList<>();
         usedBalls = new ArrayList<>();
+        ballRolls = new ArrayList<>();
         for (int i = 1; i <= 75; i++){
             String col = switch((i - 1)/15){
                 case 0 -> "B";
@@ -43,10 +45,6 @@ public class BingoSimulation {
             return null;
         BingoBall ball = rollBall();
         bch.markCards(ball, getBallsRolled());
-        if (rollsToWinners <= 0 && bch.getWonCards().size() >= winners){
-            rollsToWinners = getBallsRolled();
-            setWinnerInfo();
-        }
         return ball;
     }
 
@@ -71,13 +69,15 @@ public class BingoSimulation {
         return usedBalls;
     }
 
-    public int getRollsToWinners(){
+    public int  getRollsToWinners(){
         return rollsToWinners;
     }
 
     public int getSetWinners(){
         return winners;
     }
+
+    public ArrayList<BallRoll> getBallRolls(){ return ballRolls; }
 
     private void setWinnerInfo(){
         for(int i = 0; i < 2 * days.length; i++){
@@ -88,6 +88,47 @@ public class BingoSimulation {
                 d.setPmRolls(rollsToWinners / (2 * days.length) + ((i + 1) <= rollsToWinners % (2 * days.length) ? 1 : 0));
             }
         }
+    }
+
+    public void finishSimulation(){
+        while (getBallsRolled() < 75){
+            ballRolls.add(new BallRoll(getBallsRolled() + 1, nextRoll().getI()));
+            if (rollsToWinners < 0 && bch.getWonCards().size() == winners){
+                rollsToWinners = getBallsRolled();
+                setWinnerInfo();
+            }
+        }
+        for (CardWin cardWin : bch.getCardWins()){
+            cardWin.setDayInfo(getDayStringFromRoll(cardWin.getRollNum()));
+        }
+        for (BallRoll br : ballRolls){
+            br.setDayInfo(getDayStringFromRoll(br.getRollNum()));
+        }
+        bch.resetCards();
+        resetBalls();
+    }
+
+    public String getDayStringFromRoll(int rollNum){
+        int rolls = 0;
+        for (int i = 0; i < days.length; i++){
+            Day d = days[i];
+            rolls += d.getAmRolls();
+            if (rollNum <= rolls)
+                return d.getName().substring(0, 3) + ", AM";
+            rolls += d.getPmRolls();
+            if(rollNum <= rolls)
+                return d.getName().substring(0, 3) + ", PM";
+        }
+        return "No Day";
+    }
+
+    public void resetBalls(){
+        newBalls.addAll(usedBalls);
+        usedBalls.clear();
+    }
+
+    public int getDays(){
+        return days.length;
     }
 
 }

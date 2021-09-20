@@ -13,12 +13,14 @@ public enum BingoSimulationState {
     BINGOSIM,
     BINGOCARDLAYOUT,
     BINGOPRINT,
-    HOWTOUSE;
+    BINGOHELPSIM,
+    BINGOHELPPRINT;
 
     private AnchorPane ap;
     private int width = 600;
     private int height = 400;
     private static BingoSimulationState currentState;
+    private Scene scene;
 
     public void setAnchorPane(AnchorPane ap){
         this.ap = ap;
@@ -32,7 +34,10 @@ public enum BingoSimulationState {
         return ap;
     }
     public Scene getScene(){
-        return new Scene(ap, width, height);
+        if (scene == null){
+            scene = new Scene(ap, width, height);
+        }
+        return scene;
     }
 
     public static void goToState(BingoSimulationState bss){

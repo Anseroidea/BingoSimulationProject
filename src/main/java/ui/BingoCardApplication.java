@@ -6,11 +6,17 @@ import card.BingoCardLayout;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import print.BingoPrintHandler;
 import print.CardPrinterLayout;
 import sim.BingoSimulation;
 import sim.BingoSimulationLayoutHandler;
 import sim.BingoSimulationState;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public class BingoCardApplication extends Application {
 
@@ -23,13 +29,14 @@ public class BingoCardApplication extends Application {
     public static void setSimulation(int seed, int numCards, int numWinners, int dayNum, boolean isUpdateWonCards) {
         gameNumber = seed;
         bs = new BingoSimulation(seed, numCards, numWinners, dayNum, isUpdateWonCards);
+        bs.finishSimulation();
         BingoCardHandler bch = bs.getBingoCardHandler();
         BingoCard card = bch.getCard(0);
         BingoCardLayout.setBc(card);
         BingoCardLayout.displayBingoCard();
         BingoSimulationLayoutHandler.setCardLayout();
         BingoSimulationLayoutHandler.setNumCards(numCards);
-        BingoSimulationLayoutHandler.setNumWinners(numWinners);
+        BingoSimulationLayoutHandler.setWinnerInfo(numWinners, isUpdateWonCards);
     }
 
     public static BingoSimulation getSimulation(){
@@ -39,19 +46,24 @@ public class BingoCardApplication extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
-        new CardPrinterLayout().getBlankLayout();
-        /*
+    public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        primaryStage.setTitle("Bingo Card");
+        primaryStage.setTitle("Bingo Project > MAINMENU");
         primaryStage.setResizable(false);
         for (BingoSimulationState bss : BingoSimulationState.values()){
             try {
                 FXMLLoader loader = new FXMLLoader(BingoCardApplication.class.getResource("/fxml/" + bss.name().toLowerCase() + ".fxml"));
                 AnchorPane ap = loader.load();
                 bss.setAnchorPane(ap, ap.getPrefWidth(), ap.getPrefHeight());
-                if (bss.name().equalsIgnoreCase("bingosim"))
+                if (bss.name().equalsIgnoreCase("bingosim")) {
                     BingoSimulationLayoutHandler.setBsl(loader.getController());
+                } else if (bss.name().equalsIgnoreCase("bingoprint")){
+                    AnchorPane ap1 = new CardPrinterLayout().getDefaultLayout();
+                    HBox h = (HBox) BingoSimulationState.BINGOPRINT.getAnchorPane().getChildren().get(0);
+                    BorderPane bp = (BorderPane) h.getChildren().get(1);
+                    bp.setCenter(ap1);
+                    BingoPrintHandler.setBp(loader.getController());
+                }
             } catch (Exception e){
                 switch(bss){
                     case BINGOCARDLAYOUT -> bss.setAnchorPane(BingoCardLayout.getAnchorPane());
@@ -62,11 +74,10 @@ public class BingoCardApplication extends Application {
         BingoSimulationState.goToState(BingoSimulationState.MAINMENU);
         primaryStage.setScene(BingoSimulationState.getCurrentState().getScene());
         primaryStage.show();
-
-         */
     }
 
     public static void refreshDisplay(){
+        primaryStage.setTitle("Bingo Project > " + BingoSimulationState.getCurrentState().name());
         primaryStage.setScene(BingoSimulationState.getCurrentState().getScene());
     }
     public static void refreshCurrentScene(){
@@ -74,9 +85,7 @@ public class BingoCardApplication extends Application {
     }
 
     public static void main(String[] args){
-
         Application.launch(args);
-
     }
 
     public static Stage getPrimaryStage(){
@@ -85,6 +94,10 @@ public class BingoCardApplication extends Application {
 
     public static int getGameNumber(){
         return gameNumber;
+    }
+
+    public static void close(){
+        primaryStage.close();
     }
 
 }

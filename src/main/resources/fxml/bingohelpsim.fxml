@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.BingoHelpSim">
+   <Label layoutX="14.0" layoutY="14.0" text="Help">
+      <font>
+         <Font name="System Bold" size="20.0" />
+      </font>
+   </Label>
+   <Label layoutX="23.0" layoutY="44.0" text="Input">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
+   <Label layoutX="40.0" layoutY="61.0" text="On the input screen, input the requested values. Inputting the same numbers will give the same results" />
+   <Label layoutX="166.0" layoutY="82.0" prefHeight="37.0" prefWidth="432.0" text="- the value used to randomize cards" wrapText="true" />
+   <Label layoutX="51.0" layoutY="84.0" text="Game Number">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
+   <Label layoutX="51.0" layoutY="119.0" text="Number of Cards">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
+   <Label layoutX="166.0" layoutY="109.0" prefHeight="37.0" prefWidth="432.0" text="- the value that determines the number of cards created in the simulation" wrapText="true" />
+   <Label layoutX="51.0" layoutY="138.0" text="Number of Winners">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
+   <Label layoutX="166.0" layoutY="136.0" prefHeight="37.0" prefWidth="432.0" text="- the value that determines the number of winners in the simulation, must (and will) be less than or equal to the number of cards" wrapText="true" />
+   <Label layoutX="51.0" layoutY="173.0" text="Number of Days">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
+   <Label layoutX="166.0" layoutY="172.0" prefHeight="37.0" prefWidth="432.0" text="- the value that determines the amount of days the simulation will take place over" wrapText="true" />
+   <Label layoutX="51.0" layoutY="209.0" text="Update won cards">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
+   <Label layoutX="166.0" layoutY="208.0" prefHeight="37.0" prefWidth="432.0" text="- the value that determines whether cards that already won will still be marked with subsequent rolls (false by default)" wrapText="true" />
+   <Label layoutX="21.0" layoutY="245.0" text="Simulation">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
+   <Label layoutX="37.0" layoutY="262.0" prefHeight="72.0" prefWidth="550.0" text="On this screen, view the simulation roll by roll. Scrolling on the card view or adjusting the id field in the top right will change the viewed card. The tables in the bottom right show rolled balls and cards that have won already. Clicking on a row in the winning cards table will take you to that card. Use the following buttons to go through the simulation:" wrapText="true" />
+   <Label layoutX="51.0" layoutY="338.0" text="Roll Next">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
+   <Label layoutX="175.0" layoutY="338.0" prefHeight="37.0" prefWidth="399.0" text="- Goes to next roll in the simulation. Does nothing when all balls have been rolled" wrapText="true" />
+   <Label layoutX="51.0" layoutY="371.0" text="Roll Next Winner">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
+   <Label layoutX="175.0" layoutY="371.0" prefHeight="37.0" prefWidth="411.0" text="- Goes to the next roll where a card wins. Does nothing when all cards have won" wrapText="true" />
+   <Label layoutX="51.0" layoutY="407.0" text="Roll Until N Winners">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
+   <Label layoutX="175.0" layoutY="402.0" prefHeight="44.0" prefWidth="411.0" text="- Goes to the roll where inputted winners have won already. Does nothing when inputted number of winners has already been reached" wrapText="true" />
+   <Label layoutX="49.0" layoutY="442.0" text="Next (Print)">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
+   <Label layoutX="175.0" layoutY="442.0" prefHeight="17.0" prefWidth="411.0" text="- Skips the simulation, goes to the printing stage" wrapText="true" />
+   <Button layoutX="13.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#goToMenu" text="Main Menu" />
+   <Button layoutX="533.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#goToNext" text="Next &gt;" />
+</AnchorPane>

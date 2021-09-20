@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.BingoHelpPrint">
+    <Label layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="136.0" text="Help (Page 2)">
+        <font>
+            <Font name="System Bold" size="20.0" />
+        </font>
+    </Label>
+    <Label layoutX="23.0" layoutY="44.0" text="Print">
+        <font>
+            <Font name="System Bold" size="12.0" />
+        </font>
+    </Label>
+    <Label layoutX="40.0" layoutY="60.0" prefHeight="79.0" prefWidth="544.0" text="On the print screen, edit the appearance of the card to your liking. Choose at least one file format to output to and adjust which cards to be printed (all by default). A popup that confirms that files have been created will appear once you press the print button. Pressing &quot;Open File Location&quot; will open the output folder in Windows Explorer. Closing this popup will close the entire application." wrapText="true" />
+    <Button layoutX="509.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#goToMenu" text="Main Menu" />
+    <Button layoutX="13.0" layoutY="467.0" mnemonicParsing="false" onMouseClicked="#goToPrevious" text="&lt; Previous" />
+   <Label layoutX="165.0" layoutY="384.0" text="Happy Bingoing!">
+      <font>
+         <Font name="Bauhaus 93" size="36.0" />
+      </font></Label>
+   <Label layoutX="23.0" layoutY="139.0" text="Files">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
+   <Label layoutX="40.0" layoutY="156.0" prefHeight="79.0" prefWidth="544.0" text="The program will automatically create a folder called &quot;BingoSimulationProject&quot; in the folder where this jar is located in. This folder serves as a general folder for all file outputs. You can find outputted files in folders by game number and then folders by output time. PNGs and PDFs will be stored in the pictures folder, and simulation information will be stored in a file called simulation.txt" wrapText="true" />
+   <Label layoutX="37.0" layoutY="235.0" text="Example">
+      <font>
+         <Font name="System Bold" size="12.0" />
+      </font>
+   </Label>
+   <Label layoutX="51.0" layoutY="252.0" prefHeight="61.0" prefWidth="533.0" text="If the program is in &quot;C:\Downloads&quot;, the game number inputted is 7, the current time is 9-19-21 15:53:10, then the pictures and simulation info would be found at &quot;C:\Downloads\BingoSimulationProject\7\9-19-21 15.53.10\&quot;" wrapText="true" />
+   <Label layoutX="36.0" layoutY="313.0" text="You can always press the &quot;Open File Location&quot;' Button in the print popup to go to the folder directly." />
+</AnchorPane>
