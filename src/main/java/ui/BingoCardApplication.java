@@ -15,9 +15,6 @@ import sim.BingoSimulation;
 import sim.BingoSimulationLayoutHandler;
 import sim.BingoSimulationState;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
 public class BingoCardApplication extends Application {
 
     private static final int WIDTH = 600;

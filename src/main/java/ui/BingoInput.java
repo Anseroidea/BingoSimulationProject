@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.util.StringConverter;
 import sim.BingoSimulationState;
 
@@ -113,10 +114,19 @@ public class BingoInput implements Initializable {
             }
         });
         dayNumSpinner.getEditor().textProperty().addListener((obs, oldValue, newValue) -> {
-            if (!(newValue.matches("-?\\d+") && Integer.parseInt(newValue) > 0)){
+            if (!newValue.isBlank() && !(newValue.matches("-?\\d+") && Integer.parseInt(newValue) > 0)){
                 dayNumSpinner.getValueFactory().setValue(1);
                 dayNumSpinner.getEditor().textProperty().setValue("1");
             }
         });
+        /*
+        dayNumSpinner.addEventFilter(MouseEvent.MOUSE_CLICKED, evt -> {
+            if (!evt.getPickResult().getIntersectedNode().equals(dayNumSpinner) && dayNumSpinner.getEditor().getText().isBlank()){
+                dayNumSpinner.getValueFactory().setValue(1);
+                dayNumSpinner.getEditor().textProperty().setValue("1");
+            }
+        });
+
+         */
     }
 }
