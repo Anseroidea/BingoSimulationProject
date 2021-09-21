@@ -97,5 +97,26 @@ public class BingoInput implements Initializable {
         });
         dayNumSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 5));
         dayNumSpinner.setEditable(true);
+        dayNumSpinner.getValueFactory().setConverter(new StringConverter<Integer>() {
+            @Override
+            public String toString(Integer object) {
+                return object.toString();
+            }
+
+            @Override
+            public Integer fromString(String string) {
+                if (string.matches("-?\\d+")){
+                    return Integer.parseInt(string);
+                } else {
+                    return 1;
+                }
+            }
+        });
+        dayNumSpinner.getEditor().textProperty().addListener((obs, oldValue, newValue) -> {
+            if (!(newValue.matches("-?\\d+") && Integer.parseInt(newValue) > 0)){
+                dayNumSpinner.getValueFactory().setValue(1);
+                dayNumSpinner.getEditor().textProperty().setValue("1");
+            }
+        });
     }
 }

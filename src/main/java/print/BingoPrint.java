@@ -101,13 +101,13 @@ public class BingoPrint implements Initializable {
         fontPicker.setCellFactory(new Callback<>() {
             @Override
             public ListCell<Font> call(ListView<Font> param) {
+                param.scrollTo(defaultFont);
                 return new ListCell<>() {
                     @Override
                     protected void updateItem(Font font, boolean empty) {
                         super.updateItem(font, empty);
                         if (font != null) {
                             if (font.getName().equalsIgnoreCase(defaultFont.getName())) {
-                                param.scrollTo(font);
                                 setText(font.getName() + " - Default");
                             } else {
                                 setText(font.getName());
