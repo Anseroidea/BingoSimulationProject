@@ -1,7 +1,6 @@
 package sim;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import card.*;
 
@@ -93,7 +92,7 @@ public class BingoSimulation {
     public void finishSimulation(){
         while (getBallsRolled() < 75){
             ballRolls.add(new BallRoll(getBallsRolled() + 1, nextRoll().getI()));
-            if (rollsToWinners < 0 && bch.getWonCards().size() == winners){
+            if (rollsToWinners < 0 && bch.getWonCards().size() >= winners){
                 rollsToWinners = getBallsRolled();
                 setWinnerInfo();
             }
