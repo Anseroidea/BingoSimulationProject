@@ -20,6 +20,7 @@ import ui.*;
 import card.*;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class BingoSimulationLayout implements Initializable{
 
@@ -36,7 +37,6 @@ public class BingoSimulationLayout implements Initializable{
     @FXML private TableView<BallRoll> rollsTable;
     private ObservableList<BallRoll> ballRolls;
     private ObservableList<CardWin> cardWins;
-    private int numWinners;
     private boolean updateWinners;
     @FXML private Spinner<Integer> idSpinner;
     @FXML private Label rollLabel;
@@ -155,7 +155,7 @@ public class BingoSimulationLayout implements Initializable{
     }
 
     public void setWinnerInfo(int winners, boolean updateWinners){
-        numWinners = winners;
+        //numWinners = winners;
         String label = "Roll Until " + winners + " Winner";
         if (winners > 1){
             label += "s";
@@ -233,6 +233,6 @@ public class BingoSimulationLayout implements Initializable{
     public void goToPrint(MouseEvent mouseEvent) {
         BingoSimulationState.goToState(BingoSimulationState.BINGOPRINT);
         BingoCardApplication.refreshDisplay();
-        BingoPrintHandler.setNumCards(BingoCardApplication.getSimulation().getSetWinners());
+        BingoPrintHandler.setNumCards(BingoCardApplication.getSimulation().getBingoCardHandler().getNumCards());
     }
 }

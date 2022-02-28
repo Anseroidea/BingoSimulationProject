@@ -41,7 +41,7 @@ public class BingoInput implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        numCardsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE));
+        numCardsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1284612));
         totalWinnersSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1));
         numCardsSpinner.setEditable(true);
         totalWinnersSpinner.setEditable(true);
@@ -53,22 +53,27 @@ public class BingoInput implements Initializable {
 
             @Override
             public Integer fromString(String string) {
-                if (string.matches("-?\\d+")){
-                    return Integer.parseInt(string);
-                } else {
-                    return 1;
-                }
+                try {
+                    if (string.matches("-?\\d+")) {
+                        return Integer.parseInt(string);
+                    } else {
+                        return 1;
+                    }
+                }    catch (Exception e){
+                        return 1;
+                    }
             }
         });
         numCardsSpinner.getEditor().textProperty().addListener((obs, oldValue, newValue) -> {
             try {
                 if (newValue.matches("-?\\d+") && Integer.parseInt(newValue) > 0){
+                    System.out.println(newValue);
                     int winners = totalWinnersSpinner.getValue();
-                    totalWinnersSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.parseInt(newValue)));
+                    totalWinnersSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1));
                     totalWinnersSpinner.getValueFactory().setValue(winners);
                 } else {
-                    numCardsSpinner.getEditor().textProperty().setValue("1");
                     numCardsSpinner.getValueFactory().setValue(1);
+                    numCardsSpinner.getEditor().textProperty().setValue("1");
                 }
 
             } catch(Exception ignored){
@@ -119,14 +124,6 @@ public class BingoInput implements Initializable {
                 dayNumSpinner.getEditor().textProperty().setValue("1");
             }
         });
-        /*
-        dayNumSpinner.addEventFilter(MouseEvent.MOUSE_CLICKED, evt -> {
-            if (!evt.getPickResult().getIntersectedNode().equals(dayNumSpinner) && dayNumSpinner.getEditor().getText().isBlank()){
-                dayNumSpinner.getValueFactory().setValue(1);
-                dayNumSpinner.getEditor().textProperty().setValue("1");
-            }
-        });
 
-         */
     }
 }

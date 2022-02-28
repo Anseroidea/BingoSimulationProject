@@ -11,6 +11,7 @@ public class BingoCardHandler {
     private ArrayList<BingoCard> wonCards;
     private ArrayList<CardWin> cardWins = new ArrayList<>();
     private boolean isUpdateWonCards;
+    private int numCards;
 
     public BingoCardHandler(int seed){
         this(new Random(seed), 1, false);
@@ -24,10 +25,15 @@ public class BingoCardHandler {
         bingoCards = new ArrayList<>();
         remainingCards = new ArrayList<>();
         wonCards = new ArrayList<>();
+        this.numCards = numCards;
         for (int i = 0; i < numCards; i++){
             generateNewBingoCard();
         }
         this.isUpdateWonCards = isUpdateWonCards;
+    }
+
+    public int getNumCards(){
+        return numCards;
     }
 
     public void setWonCards(ArrayList<BingoCard> wonCards) {
